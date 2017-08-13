@@ -12,11 +12,16 @@ class App extends Component {
     console.log(this.props)
     return (
       <div className="App">
-        <ul>
+        <div className="app-container">
           {this.props.posts.map((post) => (
-            <li key={post.id}>{post.body}</li>
+            <div className="post" key={post.id}>
+              <div className="post-votes"><p>{post.voteScore}</p></div>
+              <div className="post-body"><p>{post.body}</p></div>
+              <div className="post-author"><p>{post.author}</p></div>
+              <div className="post-category"><p>{post.category}</p></div>
+            </div>
             ))}
-        </ul>
+        </div>
       </div>
     );
   }

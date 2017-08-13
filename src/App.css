@@ -22,3 +22,58 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.post {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  -ms-align-items: center;
+  align-items: center;
+  position: relative;
+  margin-bottom: 10px;
+  padding: 5px;
+  transition: all 1s ease;
+}
+.post:hover {
+  background: #EEE;
+  opacity: 1;
+}
+.post-body {
+  -webkit-flex: 1 0 auto;
+  -moz-flex: 1 0 auto;
+  -ms-flex: 1 0 auto;
+  -o-flex: 1 0 auto;
+  flex: 1 0 auto;
+  padding: 0 10px;
+  align-items: center;
+}
+.post-body h3 {
+  margin-top: 0;
+}
+.post-body p {
+  margin-bottom: 0;
+}
+.post-votes {
+  text-align: center;
+  padding: 10px;
+}
+.post-author {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+}
+.post-category {
+  font-size: 20px;
+  color: #CCC;
+  position: absolute;
+  top: 0px;
+  right: 5px;
+}
+.post-category i.fa.fa-heart {
+  color: #FFAAAA;
+}
+.post-category i.fa.fa-star {
+  color: #fbf10f;
+}
