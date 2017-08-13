@@ -6,7 +6,7 @@
 
 import {
   RECEIVE_POSTS,
-  ADD_POST,
+  CREATE_POST,
   UPDATE_POST,
   DELETE_POST,
   UPVOTE_POST,
@@ -14,14 +14,16 @@ import {
 } from '../actions/postActions'
 
 function postsReducer(state={}, action) {
-  const { posts } = action
+  const { posts, post } = action
   switch(action.type) {
     case RECEIVE_POSTS:
       return {
         ...state, posts: action.posts
       }
-    case ADD_POST:
-      return state
+    case CREATE_POST:
+      return {
+        ...state, posts: state.posts.concat([action.post])
+      }
     case UPDATE_POST:
       return state
     case DELETE_POST:

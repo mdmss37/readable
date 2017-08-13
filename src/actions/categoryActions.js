@@ -11,5 +11,5 @@ export function receiveAllcategories(categories) {
 
 export const fetchAllcategories = () => dispatch => (
   ReadableAPI
-    .fetchCategories().then(categories => dispatch(receiveAllcategories(categories)))
+    .fetchCategories().then(categories => dispatch(receiveAllcategories(categories.categories)))
   )
