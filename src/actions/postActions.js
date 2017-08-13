@@ -16,7 +16,7 @@ export function receiveAllPosts(posts) {
 
 export const fetchAllPosts = () => dispatch => (
   ReadableAPI
-    .fetchAllPosts().then(posts => dispatch(receiveAllPosts))
+    .fetchAllPosts().then(posts => dispatch(receiveAllPosts(posts)))
   )
 
 export function addPost(post) {

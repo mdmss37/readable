@@ -11,5 +11,10 @@ const headers = {
 }
 
 export const fetchAllPosts = () => {
-  return fetch(`${api}/posts`, {headers})
+  console.log("token:", token)
+  return fetch(`${api}/posts`, {headers}).then(res => res.json())
+}
+
+export const fetchCategory = () => {
+  return fetch()
 }

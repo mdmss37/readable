@@ -6,7 +6,8 @@ import { fetchAllPosts } from '../actions/postActions'
 
 class App extends Component {
   componentWillMount() {
-    this.props.dispatch(fetchAllPosts())
+    // this.props.dispatch(fetchAllPosts())
+    fetchAllPosts()(this.props.dispatch)
   }
   render() {
     console.log(this.props)
