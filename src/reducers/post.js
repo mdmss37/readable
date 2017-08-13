@@ -17,7 +17,9 @@ function postsReducer(state={}, action) {
   const { posts } = action
   switch(action.type) {
     case RECEIVE_POSTS:
-      return action.posts
+      return {
+        ...state, posts: action.posts
+      }
     case ADD_POST:
       return state
     case UPDATE_POST:

@@ -6,7 +6,7 @@ import registerServiceWorker from './registerServiceWorker';
 import { BrowserRouter } from 'react-router-dom'
 import { createStore, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
-import reducer from '../src/reducers/post'
+import reducer from '../src/reducers/reducerCombined'
 import thunk from 'redux-thunk'
 
 console.log(reducer)
@@ -29,7 +29,7 @@ const store = createStore(
     )
   )
 
-console.log(store)
+console.log(store.getState())
 
 ReactDOM.render(
   <Provider store={store}>
