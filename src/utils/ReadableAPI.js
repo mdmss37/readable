@@ -8,6 +8,7 @@ if (!token)
 const headers = {
   'Accept': 'application/json',
   'Authorization': token,
+  'Content-Type': 'application/json'
   // "Content-Type": "application/json",
   // "Access-Control-Origin": '*'
 }
@@ -17,17 +18,16 @@ export const fetchAllPosts = () => {
   return fetch(`${api}/posts`, {headers}).then(res => res.json())
 }
 
+export const fetchPostsByCategory = (category) => {
+  console.log("token:", token)
+  return fetch(`${api}/${category}/posts`, { method: 'GET', headers: headers}).then(res => res.json())
+}
+
 export const fetchCategories = () => {
   return fetch(`${api}/categories`, {headers}).then(res => res.json())
 }
 
 export const createPost = (post) => {
-  fetch(`${api}/posts`, {
-    method: 'POST',
-    headers: {
-      ...headers,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(post)
-  }).then(res => res.json())
+  fetch(`${api}/posts`, { method: 'POST', headers: headers, body: JSON.stringify(post)})
+  .then(res => res.json())
 }

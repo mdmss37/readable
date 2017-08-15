@@ -19,6 +19,11 @@ export const fetchAllPosts = () => dispatch => (
     .fetchAllPosts().then(posts => dispatch(receiveAllPosts(posts)))
   )
 
+export const fetchPostsByCategory = (category) => dispatch => (
+  ReadableAPI
+    .fetchPostsByCategory(category).then(posts => dispatch(receiveAllPosts(posts)))
+  )
+
 export function createPost(post) {
   ReadableAPI.createPost(post)
   return {

@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
-import logo from '../logo.svg';
+// import logo from '../logo.svg';
 import PropTypes from 'prop-types';
 import '../App.css';
 import { connect }  from 'react-redux'
-import { fetchAllPosts, createPost } from '../actions/postActions'
+import { fetchAllPosts, fetchPostsByCategory, createPost } from '../actions/postActions'
 import { fetchAllcategories } from '../actions/categoryActions'
 import { formatTimestamp, guid }  from '../utils/helpers'
 import serializeForm from "form-serialize"
 
 class App extends Component {
+  static propTypes = {
+    posts: PropTypes.array,
+    categories: PropTypes.array
+  }
+
   componentWillMount() {
     // this.props.dispatch(fetchAllPosts())
     fetchAllPosts()(this.props.dispatch)
@@ -30,13 +35,24 @@ class App extends Component {
     fetchAllPosts()(this.props.dispatch)
   }
 
+  handleChange = (e) => {
+    const selectedCategory = e.target.value
+    if (selectedCategory === "none") {
+      fetchAllPosts()(this.props.dispatch)
+    } else {
+      console.log(selectedCategory)
+      fetchPostsByCategory(selectedCategory)(this.props.dispatch)
+    }
+  }
+
   render() {
     console.log("this.props:", this.props.categories)
     return (
       <div className="App">
 
         <div className="category-changer">
-          <select name="" id="">
+          <select onChange={this.handleChange}>
+              <option key="none" value="none">none</option>
             {this.props.categories && this.props.categories.map((category) => (
               <option key={category.name} value={category.name}>{category.name}</option>
               ))}
@@ -84,10 +100,7 @@ class App extends Component {
   }
 }
 
-App.propTypes = {
-  posts: PropTypes.array,
-  fetchAllPosts: PropTypes.func.isRequired
-};
+
 
 // map Redux state to this.props
 function mapStateToProps({ postsReducer, categoryReducer }) {
