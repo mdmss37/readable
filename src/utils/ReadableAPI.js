@@ -12,8 +12,6 @@ const headers = {
   // "Access-Control-Origin": '*'
 }
 
-
-
 export const fetchAllPosts = () => {
   console.log("token:", token)
   return fetch(`${api}/posts`, {headers}).then(res => res.json())
@@ -25,7 +23,7 @@ export const fetchCategories = () => {
 
 export const createPost = (post) => {
   fetch(`${api}/posts`, {
-    method: "POST",
+    method: 'POST',
     headers: {
       ...headers,
       'Content-Type': 'application/json'

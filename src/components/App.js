@@ -24,11 +24,9 @@ class App extends Component {
       body: e.target.body.value,
       author: e.target.author.value,
       category: e.target.category.value,
-      voteScore: 1,
-      deleted: false,
     }
-    console.log(submitPost.id)
-    // createPost(submitPost)
+    console.log(submitPost)
+    createPost(submitPost)
     fetchAllPosts()(this.props.dispatch)
   }
 
