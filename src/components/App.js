@@ -92,7 +92,7 @@ class App extends Component {
           )}>
         </Route>
 
-        <Route exact path="/new" render={() => (
+        <Route exact path="/new" render={({ history }) => (
           <SubmitForm />
           )}>
         </Route>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect }  from 'react-redux'
+import { Link, Route, withRouter } from 'react-router-dom'
 import { fetchAllPosts, createPost} from '../actions/postActions'
 import { formatTimestamp, guid }  from '../utils/helpers'
 
@@ -7,18 +8,20 @@ import { formatTimestamp, guid }  from '../utils/helpers'
 class SubmitForm extends Component {
 
   handleSubmit = (e) => {
-  e.preventDefault()
-  const submitPost = {
-    id: guid(),
-    timestamp: Date.now(),
-    title: e.target.title.value,
-    body: e.target.body.value,
-    author: e.target.author.value,
-    category: e.target.category.value,
-  }
-  console.log(submitPost)
-  createPost(submitPost)
-  fetchAllPosts()(this.props.dispatch)
+
+    e.preventDefault()
+    const submitPost = {
+      id: guid(),
+      timestamp: Date.now(),
+      title: e.target.title.value,
+      body: e.target.body.value,
+      author: e.target.author.value,
+      category: e.target.category.value,
+    }
+    console.log(submitPost)
+    createPost(submitPost)
+    fetchAllPosts()(this.props.dispatch)
+    this.props.history.push('/')
   }
 
   render() {
@@ -61,4 +64,5 @@ function mapStateToProps({ postsReducer, categoryReducer }) {
   }
 }
 
-export default connect(mapStateToProps)(SubmitForm)
+// https://stackoverflow.com/questions/42123261/programmatically-navigate-using-react-router-v4
+export default withRouter(connect(mapStateToProps)(SubmitForm))
