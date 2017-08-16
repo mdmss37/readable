@@ -10,6 +10,8 @@ import { formatTimestamp, guid }  from '../utils/helpers'
 // https://gorangajic.github.io/react-icons/index.html
 import FaCaretUp from 'react-icons/lib/fa/caret-up'
 import FaCaretDown from 'react-icons/lib/fa/caret-down'
+import SubmitForm from './form'
+
 
 class App extends Component {
   static propTypes = {
@@ -21,21 +23,6 @@ class App extends Component {
     // this.props.dispatch(fetchAllPosts())
     fetchAllPosts()(this.props.dispatch)
     fetchAllcategories()(this.props.dispatch)
-  }
-
-  handleSubmit = (e) => {
-    e.preventDefault()
-    const submitPost = {
-      id: guid(),
-      timestamp: Date.now(),
-      title: e.target.title.value,
-      body: e.target.body.value,
-      author: e.target.author.value,
-      category: e.target.category.value,
-    }
-    console.log(submitPost)
-    createPost(submitPost)
-    fetchAllPosts()(this.props.dispatch)
   }
 
   handleChange = (e) => {
@@ -84,32 +71,7 @@ class App extends Component {
             </div>
             ))}
 
-        <form onSubmit={this.handleSubmit} className="create-post-form">
-          <ul className="form-style-1">
-            <li>
-                <label>Title <span className="required">*</span></label>
-                <input type="text" name="title" className="field-long" />
-            </li>
-            <li>
-                <label>Name <span className="required">*</span></label>
-                <input type="text" name="author" className="field-long" />
-            </li>
-            <li>
-                <label>Category</label>
-                <select name="category" className="field-select">
-                {this.props.categories && this.props.categories.map((category) => (
-                  <option key={category.name} value={category.name}>{category.name}</option>
-                ))}
-                </select>
-            </li>
-            <li>
-                <label>Your Post here <span className="required">*</span></label>
-                <textarea name="body" id="field5" className="field-long field-textarea"></textarea>
-            </li>
-            <button>Submit Post</button>
-          </ul>
-        </form>
-
+        <SubmitForm />
       </div>
     );
   }
