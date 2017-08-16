@@ -47,6 +47,8 @@ export function deletePost(post) {
 }
 
 export function upvotePost(post) {
+  console.log("From upvotePost, post:", post)
+  ReadableAPI.upvotePost(post.id)
   return {
     type: UPVOTE_POST,
     post,

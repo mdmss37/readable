@@ -3,10 +3,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import '../App.css';
 import { connect }  from 'react-redux'
-import { fetchAllPosts, fetchPostsByCategory, createPost } from '../actions/postActions'
+import { fetchAllPosts, fetchPostsByCategory, createPost, upvotePost } from '../actions/postActions'
 import { fetchAllcategories } from '../actions/categoryActions'
 import { formatTimestamp, guid }  from '../utils/helpers'
-import serializeForm from "form-serialize"
+// import serializeForm from "form-serialize"
+// https://gorangajic.github.io/react-icons/index.html
+import FaCaretUp from 'react-icons/lib/fa/caret-up'
+import FaCaretDown from 'react-icons/lib/fa/caret-down'
 
 class App extends Component {
   static propTypes = {
@@ -46,7 +49,7 @@ class App extends Component {
   }
 
   render() {
-    console.log("this.props:", this.props.categories)
+    console.log("this.props:", this.props.posts)
     return (
       <div className="App">
 
@@ -61,7 +64,14 @@ class App extends Component {
 
           {this.props.posts && this.props.posts.map((post) => (
             <div className="post" key={post.id}>
-              <div className="post-votes"><p>{post.voteScore}</p></div>
+              <div className="post-votes">
+                <FaCaretUp size={30} className="caret-up" onClick={() => {
+                  upvotePost(post)
+                  fetchAllPosts()(this.props.dispatch)
+                }}/>
+                <p>{post.voteScore}</p>
+                <FaCaretDown size={30} className="caret-down"/>
+              </div>
               <div className="post-title"><h3>{post.title}</h3></div>
               <div className="post-body"><p>{post.body}</p></div>
               <div className="post-author"><p>{post.author} at {formatTimestamp(post.timestamp)}</p></div>
@@ -99,7 +109,6 @@ class App extends Component {
     );
   }
 }
-
 
 
 // map Redux state to this.props

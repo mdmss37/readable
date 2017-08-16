@@ -31,3 +31,10 @@ export const createPost = (post) => {
   fetch(`${api}/posts`, { method: 'POST', headers: headers, body: JSON.stringify(post)})
   .then(res => res.json())
 }
+
+export const upvotePost = (post_id) => {
+  console.log("upvotePost")
+  console.log(post_id)
+  fetch(`${api}/posts/${post_id}`, { method: 'POST', headers: headers, body: JSON.stringify({option: "upVote"})})
+  .then(res => res.json())
+}
