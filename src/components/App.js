@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import '../App.css';
 import { connect }  from 'react-redux'
-import { fetchAllPosts, fetchPostsByCategory, createPost, upvotePost } from '../actions/postActions'
+import { fetchAllPosts, fetchPostsByCategory, createPost, upvotePost, downvotePost } from '../actions/postActions'
 import { fetchAllcategories } from '../actions/categoryActions'
 import { formatTimestamp, guid }  from '../utils/helpers'
 // import serializeForm from "form-serialize"
@@ -70,12 +70,17 @@ class App extends Component {
                   fetchAllPosts()(this.props.dispatch)
                 }}/>
                 <p>{post.voteScore}</p>
-                <FaCaretDown size={30} className="caret-down"/>
+                <FaCaretDown size={30} className="caret-down" onClick={() => {
+                  downvotePost(post)
+                  fetchAllPosts()(this.props.dispatch)
+                }}/>
               </div>
+              <div className="post-description">
               <div className="post-title"><h3>{post.title}</h3></div>
               <div className="post-body"><p>{post.body}</p></div>
+              </div>
               <div className="post-author"><p>{post.author} at {formatTimestamp(post.timestamp)}</p></div>
-              <div className="post-category"><p>{post.category}</p></div>
+              <div className="post-category"><p>Category: {post.category}</p></div>
             </div>
             ))}
 
@@ -109,7 +114,6 @@ class App extends Component {
     );
   }
 }
-
 
 // map Redux state to this.props
 function mapStateToProps({ postsReducer, categoryReducer }) {

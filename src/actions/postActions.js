@@ -56,6 +56,8 @@ export function upvotePost(post) {
 }
 
 export function downvotePost(post) {
+  console.log("From downvotePost, post:", post)
+  ReadableAPI.downvotePost(post.id)
   return {
     type: DOWNVOTE_POST,
     post,
