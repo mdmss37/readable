@@ -22,7 +22,15 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
-
+.nav-bar {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
 .post {
   height: 150px;
   display: -webkit-flex;
@@ -61,17 +69,20 @@
   text-align: center;
   padding: 10px;
 }
+.post-detail {
+  position: relative
+}
 .post-author {
-  position: absolute;
+/*  position: absolute;
   bottom: 5px;
-  right: 5px;
+  right: 5px;*/
 }
 .post-category {
   font-size: 20px;
   color: #CCC;
-  position: absolute;
+/*  position: absolute;
   top: 0px;
-  right: 5px;
+  right: 5px;*/
 }
 /*.post-category i.fa.fa-heart {
   color: #FFAAAA;

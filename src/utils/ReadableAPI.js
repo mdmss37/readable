@@ -45,3 +45,7 @@ export const downvotePost = (post_id) => {
   fetch(`${api}/posts/${post_id}`, { method: 'POST', headers: headers, body: JSON.stringify({option: "downVote"})})
   .then(res => res.json())
 }
+
+export const fetchAllComments = () => {
+  console.log("fetchAllComments", token)
+}
