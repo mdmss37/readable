@@ -6,6 +6,7 @@ import '../App.css';
 import { connect }  from 'react-redux'
 import { fetchAllPosts, fetchPostsByCategory, createPost, upvotePost, downvotePost } from '../actions/postActions'
 import { fetchAllcategories } from '../actions/categoryActions'
+import { fetchCommentsById } from '../actions/commentActions'
 import { formatTimestamp, guid }  from '../utils/helpers'
 // import serializeForm from "form-serialize"
 // https://gorangajic.github.io/react-icons/index.html
@@ -22,10 +23,12 @@ class App extends Component {
     categories: PropTypes.array
   }
 
-  componentWillMount() {
+  componentDidMount() {
     // this.props.dispatch(fetchAllPosts())
     fetchAllPosts()(this.props.dispatch)
     fetchAllcategories()(this.props.dispatch)
+    // this.props.posts
+    fetchCommentsById({id: "8xf0y6ziyjabvozdd253nd" })(this.props.dispatch)
   }
 
   handleChange = (e) => {
@@ -39,8 +42,8 @@ class App extends Component {
   }
 
   render() {
-    console.log("this.props:", this.props.posts)
-    const {posts, category} = this.props
+    console.log("this.props:", this.props.comments)
+    const {posts, categories, comments } = this.props
 
     return (
       <div className="App">
@@ -55,7 +58,7 @@ class App extends Component {
             <p>Filter Post by Category</p>
             <select onChange={this.handleChange}>
                 <option key="none" value="none">none</option>
-              {this.props.categories && this.props.categories.map((category) => (
+              {categories && categories.map((category) => (
                 <option key={category.name} value={category.name}>{category.name}</option>
                 ))}
             </select>
@@ -64,7 +67,7 @@ class App extends Component {
 
         <Route exact path="/" render={() => (
           <div className="post-list">
-            {this.props.posts && this.props.posts.map((post) => (
+            {posts && posts.map((post) => (
               <div className="post" key={post.id}>
                 <div className="post-votes">
                   <FaCaretUp size={30} className="caret-up" onClick={() => {
@@ -84,29 +87,31 @@ class App extends Component {
                 <div className="post-detail">
                   <div className="post-category"><p>Category: {post.category}</p></div>
                   <div className="post-author"><p>{post.author} at {formatTimestamp(post.timestamp)}</p></div>
+                  <div className="post-comment"><p>Comment# {comments && comments[post.id] ? comments[post.id].length : 0}</p></div>
                 </div>
               </div>
               ))}
           </div>
-
           )}>
         </Route>
 
-        <Route exact path="/new" render={({ history }) => (
+        <Route exact path="/new" render={() => (
           <SubmitForm />
           )}>
         </Route>
+
       </div>
     );
   }
 }
 
 // map Redux state to this.props
-function mapStateToProps({ postsReducer, categoryReducer }) {
+function mapStateToProps({ postsReducer, categoryReducer, commentsReducer }) {
   console.log("state", this.state)
   return {
     posts: postsReducer.posts,
-    categories: categoryReducer.categories
+    categories: categoryReducer.categories,
+    comments: commentsReducer.comments
   }
 }
 

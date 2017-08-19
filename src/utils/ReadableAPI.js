@@ -27,9 +27,9 @@ export const fetchCategories = () => {
   return fetch(`${api}/categories`, {headers}).then(res => res.json())
 }
 
-export const createPost = (post) => {
+export const createPost = (post, callback) => {
   fetch(`${api}/posts`, { method: 'POST', headers: headers, body: JSON.stringify(post)})
-  .then(res => res.json())
+  .then(() => callback())
 }
 
 export const upvotePost = (post_id) => {
@@ -46,6 +46,9 @@ export const downvotePost = (post_id) => {
   .then(res => res.json())
 }
 
-export const fetchAllComments = () => {
-  console.log("fetchAllComments", token)
+export const fetchCommentsById = (post_id) => {
+  console.log("fetchAllComments", `${api}/posts/${post_id}/comments`)
+  return fetch(`${api}/posts/${post_id}/comments`, { headers: headers })
+  .then(res => res.json())
+  .then(data => data)
 }

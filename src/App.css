@@ -91,6 +91,21 @@
   color: #fbf10f;
 }*/
 /*Form CSS*/
+.comment {
+  height: 150px;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  -ms-align-items: center;
+  align-items: center;
+  position: relative;
+  margin: 0 100px 10px 100px;
+  padding: 5px;
+  transition: all 1s ease;
+  justify-content: center;
+}
 .create-post-details {
   width: 100%;
   display: -webkit-flex;

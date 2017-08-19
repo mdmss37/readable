@@ -20,16 +20,12 @@ export const fetchAllPosts = () => dispatch => (
   )
 
 export const fetchPostsByCategory = (category) => dispatch => (
-  ReadableAPI
-    .fetchPostsByCategory(category).then(posts => dispatch(receiveAllPosts(posts)))
+  ReadableAPI.fetchPostsByCategory(category).then(posts => dispatch(receiveAllPosts(posts)))
   )
 
-export function createPost(post) {
-  ReadableAPI.createPost(post)
-  return {
-    type: CREATE_POST,
-    post,
-  }
+export const createPost = (post, callback) => dispatch => {
+  ReadableAPI.createPost(post, callback)
+  dispatch({type: CREATE_POST, post})
 }
 
 export function updatePost(post) {

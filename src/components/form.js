@@ -8,7 +8,6 @@ import { formatTimestamp, guid }  from '../utils/helpers'
 class SubmitForm extends Component {
 
   handleSubmit = (e) => {
-
     e.preventDefault()
     const submitPost = {
       id: guid(),
@@ -19,15 +18,14 @@ class SubmitForm extends Component {
       category: e.target.category.value,
     }
     console.log(submitPost)
-    createPost(submitPost)
-    fetchAllPosts()(this.props.dispatch)
-    this.props.history.push('/')
+    createPost(submitPost, () => this.props.history.push('/') )(this.props.dispatch)
   }
 
   render() {
     console.log("from SubmitForm:", this.props)
     return (
       <form onSubmit={this.handleSubmit} className="create-post-form">
+        <h1>Create New Post</h1>
         <ul className="form-style-1">
           <li>
             <label>Title <span className="required">*</span></label>
