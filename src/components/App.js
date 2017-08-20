@@ -15,7 +15,7 @@ import FaCaretDown from 'react-icons/lib/fa/caret-down'
 import FaPencil from 'react-icons/lib/fa/pencil'
 import FaHome from 'react-icons/lib/fa/home'
 import SubmitForm from './form'
-
+import PostList from '../container/post_list'
 
 class App extends Component {
   static propTypes = {
@@ -25,7 +25,7 @@ class App extends Component {
 
   componentDidMount() {
     // this.props.dispatch(fetchAllPosts())
-    fetchAllPosts()(this.props.dispatch)
+    // fetchAllPosts()(this.props.dispatch)
     fetchAllcategories()(this.props.dispatch)
     // this.props.posts
     fetchCommentsById({id: "8xf0y6ziyjabvozdd253nd" })(this.props.dispatch)
@@ -66,32 +66,7 @@ class App extends Component {
         </div>
 
         <Route exact path="/" render={() => (
-          <div className="post-list">
-            {posts && posts.map((post) => (
-              <div className="post" key={post.id}>
-                <div className="post-votes">
-                  <FaCaretUp size={30} className="caret-up" onClick={() => {
-                    upvotePost(post)
-                    fetchAllPosts()(this.props.dispatch)
-                  }}/>
-                  <p>{post.voteScore}</p>
-                  <FaCaretDown size={30} className="caret-down" onClick={() => {
-                    downvotePost(post)
-                    fetchAllPosts()(this.props.dispatch)
-                  }}/>
-                </div>
-                <div className="post-description">
-                  <div className="post-title"><h3>{post.title}</h3></div>
-                  <div className="post-body"><p>{post.body}</p></div>
-                </div>
-                <div className="post-detail">
-                  <div className="post-category"><p>Category: {post.category}</p></div>
-                  <div className="post-author"><p>{post.author} at {formatTimestamp(post.timestamp)}</p></div>
-                  <div className="post-comment"><p>Comment# {comments && comments[post.id] ? comments[post.id].length : 0}</p></div>
-                </div>
-              </div>
-              ))}
-          </div>
+          <PostList/>
           )}>
         </Route>
 
@@ -109,7 +84,7 @@ class App extends Component {
 function mapStateToProps({ postsReducer, categoryReducer, commentsReducer }) {
   console.log("state", this.state)
   return {
-    posts: postsReducer.posts,
+    // posts: postsReducer.posts,
     categories: categoryReducer.categories,
     comments: commentsReducer.comments
   }
@@ -118,3 +93,36 @@ function mapStateToProps({ postsReducer, categoryReducer, commentsReducer }) {
 // https://stackoverflow.com/questions/45056150/react-router-v4-not-working-with-redux
 // https://reacttraining.com/react-router/web/guides/redux-integration
 export default withRouter(connect(mapStateToProps)(App))
+
+        // <Route exact path="/" render={() => (
+        //   <div className="post-list">
+        //     {posts && posts.map((post) => (
+        //       <div className="post" key={post.id}>
+        //         <div className="post-votes">
+        //           <FaCaretUp size={30} className="caret-up" onClick={() => {
+        //             upvotePost(post)
+        //             fetchAllPosts()(this.props.dispatch)
+        //           }}/>
+        //           <p>{post.voteScore}</p>
+        //           <FaCaretDown size={30} className="caret-down" onClick={() => {
+        //             downvotePost(post)
+        //             fetchAllPosts()(this.props.dispatch)
+        //           }}/>
+        //         </div>
+        //         <div className="post-description">
+        //           <div className="post-title"><h3>{post.title}</h3></div>
+        //           <div className="post-body"><p>{post.body}</p></div>
+        //         </div>
+        //         <div className="post-detail">
+        //           <div className="post-category"><p>Category: {post.category}</p></div>
+        //           <div className="post-author"><p>{post.author} at {formatTimestamp(post.timestamp)}</p></div>
+        //           <div className="post-comment"><p>Comment# {comments && comments[post.id] ? comments[post.id].length : 0}</p></div>
+        //         </div>
+        //       </div>
+        //       ))}
+        //   </div>
+        //   )}>
+        // </Route>
+
+
+
