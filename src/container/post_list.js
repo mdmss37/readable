@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Post from '../components/post'
 import { connect }  from 'react-redux'
 import { Link, Route, withRouter } from 'react-router-dom'
 import { fetchAllPosts, fetchPostsByCategory, createPost, upvotePost, downvotePost } from '../actions/postActions'
 
 class PostList extends Component {
+  static propTypes = {
+    posts: PropTypes.array
+  }
   componentDidMount() {
     fetchAllPosts()(this.props.dispatch)
   }

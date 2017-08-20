@@ -28,7 +28,7 @@ class App extends Component {
     // fetchAllPosts()(this.props.dispatch)
     fetchAllcategories()(this.props.dispatch)
     // this.props.posts
-    fetchCommentsById({id: "8xf0y6ziyjabvozdd253nd" })(this.props.dispatch)
+    // fetchCommentsById({id: "8xf0y6ziyjabvozdd253nd" })(this.props.dispatch)
   }
 
   handleChange = (e) => {
