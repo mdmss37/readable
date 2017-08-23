@@ -10,15 +10,16 @@ import { fetchAllPosts, fetchPostsByCategory, createPost, votePost, downvotePost
 
 class PostDetail extends Component {
   componentDidMount() {
-    const {post, match, fetchAllPosts, fetchPostComments } = this.props
+    const {post, match, fetchAllPosts, fetchCommentsById } = this.props
     if(!post) {
       fetchAllPosts()
     }
+    console.log("fetchCommentsById", fetchCommentsById(match.params.postId))
     fetchCommentsById(match.params.postId)
   }
 
   render() {
-    const {post, comments} = this.props
+    const {post, comment} = this.props
 
     return(
       <div>
@@ -42,7 +43,7 @@ class PostDetail extends Component {
           <div className="post-detail">
             <div className="post-category"><p>Category: {post.category}</p></div>
             <div className="post-author"><p>{post.author} at {formatTimestamp(post.timestamp)}</p></div>
-            <div className="post-comment"><p>Comment# {comments && comments[post.id] ? comments[post.id].length : 0}</p></div>
+            <div className="post-comment"><p>Comment# {comment && comment ? comment.length : 0}</p></div>
           </div>
         </div>
       )}
@@ -52,15 +53,17 @@ class PostDetail extends Component {
   }
 }
 
-function mapStateToProps({ posts, categoryReducer, commentsReducer }, ownProps) {
-  console.log("ownProps", ownProps)
+function mapStateToProps({ posts, comments }, {match}) {
+  // console.log("ownProps", ownProps)
   return {
-    post: _.find(posts, {id: /*ownProps.match.params.postId ? ownProps.match.params.postId :*/ ownProps.postId }),
-    comments: commentsReducer.comments
+    post: _.find(posts, {id: match.params.postId }),
+    comment: comments[match.params.postId]
   }
 }
 
-export default connect(mapStateToProps, {fetchAllPosts, fetchCommentsById})(PostDetail)
+export default connect(mapStateToProps, {
+                fetchAllPosts,
+                fetchCommentsById})(PostDetail)
 
 
 

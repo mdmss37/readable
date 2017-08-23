@@ -38,7 +38,9 @@ class PostList extends Component {
               }}/>
             </div>
             <div className="post-description">
-              <div className="post-title"><h3>{post.title}</h3></div>
+              <Link to={`/post/${post.id}`}>
+                <div className="post-title"><h3>{post.title}</h3></div>
+              </Link>
               <div className="post-body"><p>{post.body}</p></div>
             </div>
             <div className="post-detail">
@@ -52,11 +54,11 @@ class PostList extends Component {
     )
   }
 }
-function mapStateToProps({ posts, commentsReducer }) {
+function mapStateToProps({ posts, comments }) {
   console.log("state from PostList", this.state)
   return {
     posts: posts,
-    comments: commentsReducer.comments
+    comments: comments.comments
   }
 }
 

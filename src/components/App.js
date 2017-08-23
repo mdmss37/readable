@@ -70,8 +70,7 @@ class App extends Component {
           <Route exact path="/" component={PostList}/>
           <Route exact path="/new" component={SubmitForm}/>
           <Route
-          exact path="/post/:postId"
-          render={(props) => <PostDetail {...props} />}/>
+            exact path="/post/:postId" component={PostDetail}/>
         </Switch>
 
       </div>

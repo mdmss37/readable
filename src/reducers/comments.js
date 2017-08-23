@@ -1,5 +1,4 @@
 import {
-  RECEIVE_COMMENTS,
   GET_COMMENTS,
   CREATE_COMMENT,
   UPDATE_COMMENT,
@@ -8,7 +7,7 @@ import {
   DOWNVOTE_COMMENT
 } from '../actions/commentActions'
 
-function commentsReducer(state={}, action) {
+function comments(state={}, action) {
   const { comments, postId } = action
   switch(action.type) {
     case GET_COMMENTS:
@@ -18,6 +17,6 @@ function commentsReducer(state={}, action) {
   }
 }
 
-export default commentsReducer
+export default comments
 
 export const getPostComments = (state, id) => state[id]

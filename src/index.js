@@ -9,7 +9,7 @@ import { Provider } from 'react-redux'
 import reducer from '../src/reducers/reducerCombined'
 import thunk from 'redux-thunk'
 
-console.log(reducer)
+// console.log(reducer)
 
 const logger = store => next => action => {
   console.group(action.type)
@@ -29,7 +29,7 @@ const store = createStore(
     )
   )
 
-console.log(store.getState())
+// console.log(store.getState())
 
 ReactDOM.render(
   <BrowserRouter>
