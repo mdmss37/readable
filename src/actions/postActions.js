@@ -57,10 +57,18 @@ export const createPost = (post, callback) => {
   }
 }
 
-export function updatePost(post) {
-  return {
-    type: UPDATE_POST,
-    post,
+export const updatePost = (postId, title, body, callback) => {
+  return (dispatch) => {
+    fetch(`${apiUrl}/posts/${postId}`, {
+      method: 'PUT',
+      headers: headers,
+      body: JSON.stringify({title: title, body: body})
+    })
+    .then(res => res.json())
+    .then(updatedPost => {
+      dispatch({type: UPDATE_POST, updatedPost, postId})
+    })
+    .then(() => callback())
   }
 }
 

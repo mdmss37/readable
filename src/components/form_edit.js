@@ -2,7 +2,7 @@ import _ from 'lodash'
 import React, { Component } from 'react';
 import { connect }  from 'react-redux'
 import { Link, Route, withRouter } from 'react-router-dom'
-import { fetchAllPosts, createPost} from '../actions/postActions'
+import { fetchAllPosts, updatePost } from '../actions/postActions'
 import { formatTimestamp, guid }  from '../utils/helpers'
 
 // TODO: http://redux-form.com/6.7.0/docs/faq/HowToConnect.md/
@@ -13,16 +13,12 @@ class EditForm extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    const submitPost = {
-      title: e.target.title.value,
-      body: e.target.body.value,
-    }
-    console.log(submitPost)
-    this.props.createPost(submitPost, () => this.props.history.push('/') )
-  }
+    const postId = this.props.post.id
+    const title = e.target.title.value
+    const body = e.target.body.value
 
-  userLink(postId) {
-    return `post/${postId}`
+    this.props.updatePost(postId, title, body,
+      () => this.props.history.push('/') )
   }
 
   render() {
@@ -37,12 +33,12 @@ class EditForm extends Component {
           <ul className="form-style-1">
             <li>
               <label>Title <span className="required">*</span></label>
-              <input value={post.title} type="text" name="title" className="field-long" />
+              <input placeholder={post.title} type="text" name="title" className="field-long" />
             </li>
 
             <li>
               <label>Your Post here <span className="required">*</span></label>
-              <textarea value={post.body} name="body" id="field5" className="field-long field-textarea"></textarea>
+              <textarea placeholder={post.body} name="body" id="field5" className="field-long field-textarea"></textarea>
             </li>
             <button>Update Post</button>
           </ul>
@@ -63,4 +59,7 @@ function mapStateToProps({ posts }, {match}) {
 }
 
 // https://stackoverflow.com/questions/42123261/programmatically-navigate-using-react-router-v4
-export default connect(mapStateToProps, {fetchAllPosts})(EditForm)
+export default connect(mapStateToProps, {
+                fetchAllPosts,
+                updatePost})(EditForm)
+
