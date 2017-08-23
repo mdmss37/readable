@@ -6,35 +6,36 @@
 
 import {
   RECEIVE_POSTS,
+  GET_POSTS,
   CREATE_POST,
   UPDATE_POST,
   DELETE_POST,
-  UPVOTE_POST,
-  DOWNVOTE_POST,
+  VOTE_POST
 } from '../actions/postActions'
 
-function postsReducer(state={}, action) {
+function posts(state=[], action) {
   const { posts, post } = action
   switch(action.type) {
-    case RECEIVE_POSTS:
-      return {
-        ...state, posts: action.posts
-      }
+    case GET_POSTS:
+      return action.posts.filter(post => !(post.deleted))
     case CREATE_POST:
       return {
-        ...state, posts: state.posts.concat([action.post])
+        ...state, posts: state.posts.concat([post])
       }
     case UPDATE_POST:
       return state
     case DELETE_POST:
       return state
-    case UPVOTE_POST:
-      return state
-    case DOWNVOTE_POST:
-      return state
+    case VOTE_POST:
+      return state.map(post => {
+        if (post.id === action.post.id) {
+          post.voteScore = action.post.voteScore
+        }
+        return post
+      })
     default:
       return state
   }
 }
 
-export default postsReducer
+export default posts

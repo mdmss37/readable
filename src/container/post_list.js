@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Post from '../components/post'
+import PostDetail from '../components/post_detail'
 import { connect }  from 'react-redux'
 import { Link, Route, withRouter } from 'react-router-dom'
 import { fetchAllPosts, fetchPostsByCategory, createPost, upvotePost, downvotePost } from '../actions/postActions'
@@ -10,30 +10,31 @@ class PostList extends Component {
     posts: PropTypes.array
   }
   componentDidMount() {
-    fetchAllPosts()(this.props.dispatch)
+    console.log("componentDidMount from PostList", this.props)
+    this.props.fetchAllPosts()
   }
 
   render() {
-    console.log("From PostList",this.props.posts)
+    console.log("From PostList", this.props.posts)
     if(!this.props.posts) {
       return <div>Loading...</div>
     }
 
     return (
       <div className="post-list">
-        {this.props.posts.map((post) => (
-          <Post post={post}/>
-      ))}
+        {this.props.posts.map(post => (
+          <div>{post.id}</div>
+          ))}
       </div>
     )
   }
 }
 
-function mapStateToProps({ postsReducer }) {
+function mapStateToProps({ posts }) {
   console.log("state from PostList", this.state)
   return {
-    posts: postsReducer.posts,
+    posts: posts
   }
 }
 
-export default withRouter(connect(mapStateToProps)(PostList))
+export default connect(mapStateToProps, {fetchAllPosts})(PostList)

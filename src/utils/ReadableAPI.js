@@ -1,3 +1,4 @@
+export const apiUrl = 'http://localhost:5001'
 const api = 'http://localhost:5001'
 
 let token = localStorage.token
@@ -5,12 +6,17 @@ let token = localStorage.token
 if (!token)
   token = localStorage.token = Math.random().toString(36).substr(-8)
 
+
+export const requestHeaders = {
+  'Accept': 'application/json',
+  'Authorization': Math.random().toString(36).substr(-8),
+  'Content-Type': 'application/json'
+}
+
 const headers = {
   'Accept': 'application/json',
   'Authorization': token,
   'Content-Type': 'application/json'
-  // "Content-Type": "application/json",
-  // "Access-Control-Origin": '*'
 }
 
 export const fetchAllPosts = () => {
@@ -46,9 +52,8 @@ export const downvotePost = (post_id) => {
   .then(res => res.json())
 }
 
-export const fetchCommentsById = (post_id) => {
-  console.log("fetchAllComments", `${api}/posts/${post_id}/comments`)
-  return fetch(`${api}/posts/${post_id}/comments`, { headers: headers })
-  .then(res => res.json())
-  .then(data => data)
-}
+// export const fetchCommentsById = (post_id) => {
+//   console.log("fetchAllComments", `${api}/posts/${post_id}/comments`)
+//   return fetch(`${api}/posts/${post_id}/comments`, { headers: headers })
+//   .then(res => res.json())
+// }

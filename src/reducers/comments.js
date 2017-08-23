@@ -1,5 +1,6 @@
 import {
   RECEIVE_COMMENTS,
+  GET_COMMENTS,
   CREATE_COMMENT,
   UPDATE_COMMENT,
   DELETE_COMMENT,
@@ -8,29 +9,15 @@ import {
 } from '../actions/commentActions'
 
 function commentsReducer(state={}, action) {
-  const { comments, post_id } = action
+  const { comments, postId } = action
   switch(action.type) {
-    case RECEIVE_COMMENTS:
-      return {
-        ...state,
-          comments: {
-            ...state[comments],
-            [action.post_id]: action.comments
-          }
-      }
-    case CREATE_COMMENT:
-      return state
-    case UPDATE_COMMENT:
-      return state
-    case DELETE_COMMENT:
-      return state
-    case UPVOTE_COMMENT:
-      return state
-    case DOWNVOTE_COMMENT:
-      return state
+    case GET_COMMENTS:
+      return Object.assign({}, state, {[postId]: comments})
     default:
-      return state
+    return state
   }
 }
 
 export default commentsReducer
+
+export const getPostComments = (state, id) => state[id]
