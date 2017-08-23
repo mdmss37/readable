@@ -14,7 +14,7 @@ import {
 } from '../actions/postActions'
 
 function posts(state=[], action) {
-  const { posts, post } = action
+  const { posts, post, postId } = action
   switch(action.type) {
     case GET_POSTS:
       return action.posts.filter(post => !(post.deleted))
@@ -25,7 +25,7 @@ function posts(state=[], action) {
     case UPDATE_POST:
       return state
     case DELETE_POST:
-      return state
+      return state.filter(post => post.id !== postId)
     case VOTE_POST:
       return state.map(post => {
         if (post.id === action.postId) {

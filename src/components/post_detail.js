@@ -6,7 +6,7 @@ import FaCaretDown from 'react-icons/lib/fa/caret-down'
 import { formatTimestamp, guid }  from '../utils/helpers'
 import { Link, Route, withRouter } from 'react-router-dom'
 import { fetchCommentsById } from '../actions/commentActions'
-import { fetchAllPosts, votePost} from '../actions/postActions'
+import { fetchAllPosts, votePost, deletePost } from '../actions/postActions'
 import Comments from './comments'
 
 class PostDetail extends Component {
@@ -17,8 +17,16 @@ class PostDetail extends Component {
     fetchCommentsById(match.params.postId)
   }
 
+  onDeleteClick = () => {
+    const id = this.props.match.params.postId
+    console.log("onDeleteClick, id:", id)
+    this.props.deletePost(id, () => {
+      this.props.history.push('/')
+    })
+  }
+
   render() {
-    const {post, comments, votePost} = this.props
+    const {post, comments, votePost, deletePost} = this.props
 
     return(
       <div>
@@ -40,7 +48,10 @@ class PostDetail extends Component {
           <div className="post-detail">
             <div className="post-category"><p>Category: {post.category}</p></div>
             <div className="post-author"><p>{post.author} at {formatTimestamp(post.timestamp)}</p></div>
-            <div className="post-comment"><p>Comment# {comments && comments ? comments.length : 0}</p></div>
+            <div className="post-comment"><p>Number of Comments {comments && comments ? comments.length : 0}</p></div>
+          </div>
+          <div>
+            <button onClick={(e) => this.onDeleteClick(e)}>Delete Post</button>
           </div>
         </div>
       )}
@@ -61,7 +72,9 @@ function mapStateToProps({ posts, comments }, {match}) {
 export default connect(mapStateToProps, {
                 fetchAllPosts,
                 fetchCommentsById,
-                votePost})(PostDetail)
+                votePost,
+                deletePost
+                })(PostDetail)
 
 
 

@@ -34,7 +34,6 @@ class Comments extends Component {
               <div className="post-body"><p>{comment.body}</p></div>
             </div>
             <div className="post-detail">
-              <div className="post-category"><p>Category: {comment.category}</p></div>
               <div className="post-author"><p>{comment.author} at {formatTimestamp(comment.timestamp)}</p></div>
             </div>
           </div>

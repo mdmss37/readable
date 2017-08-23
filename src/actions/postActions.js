@@ -66,10 +66,15 @@ export function updatePost(post) {
   }
 }
 
-export function deletePost(post) {
-  return {
-    type: DELETE_POST,
-    post,
+export const deletePost = (postId, callback) => {
+  return dispatch => {
+    fetch(`${apiUrl}/posts/${postId}`, {
+        method: 'DELETE',
+        headers: headers})
+    .then(() => callback())
+    dispatch => {
+      dispatch({type: DELETE_POST, postId})
+    }
   }
 }
 
