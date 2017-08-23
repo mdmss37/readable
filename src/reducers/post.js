@@ -28,8 +28,13 @@ function posts(state=[], action) {
       return state
     case VOTE_POST:
       return state.map(post => {
-        if (post.id === action.post.id) {
-          post.voteScore = action.post.voteScore
+        if (post.id === action.postId) {
+          if (action.option === "upVote") {
+            post.voteScore += 1
+          }
+          if (action.option === "downVote") {
+            post.voteScore -= 1
+          }
         }
         return post
       })

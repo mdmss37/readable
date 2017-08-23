@@ -6,8 +6,8 @@ import PostDetail from '../components/post_detail'
 import { formatTimestamp }  from '../utils/helpers'
 import { connect }  from 'react-redux'
 import { Link, Route, withRouter } from 'react-router-dom'
-import { fetchAllPosts, fetchPostsByCategory, createPost, votePost} from '../actions/postActions'
-
+import { fetchAllPosts, votePost} from '../actions/postActions'
+import { fetchCommentsById } from '../actions/commentActions'
 
 class PostList extends Component {
   static propTypes = {
@@ -16,10 +16,13 @@ class PostList extends Component {
   componentDidMount() {
     console.log("componentDidMount from PostList", this.props)
     this.props.fetchAllPosts()
+    for (const post of this.props.posts) {
+        this.props.fetchCommentsById(post.id)
+    }
   }
 
   render() {
-    console.log("From PostList", this.props.posts)
+    console.log("From PostList, posts:", this.props.posts)
     const {posts, comments, votePost} = this.props
     if(!posts) {
       return <div>Loading...</div>
@@ -46,7 +49,7 @@ class PostList extends Component {
             <div className="post-detail">
               <div className="post-category"><p>Category: {post.category}</p></div>
               <div className="post-author"><p>{post.author} at {formatTimestamp(post.timestamp)}</p></div>
-              <div className="post-comment"><p>Comment# {comments && comments[post.id] ? comments[post.id].length : 0}</p></div>
+              <div className="post-comment"><p>Number of Comments {comments && comments[post.id] ? comments[post.id].length : 0}</p></div>
             </div>
           </div>
         ))}
@@ -58,8 +61,11 @@ function mapStateToProps({ posts, comments }) {
   console.log("state from PostList", this.state)
   return {
     posts: posts,
-    comments: comments.comments
+    comments: comments
   }
 }
 
-export default connect(mapStateToProps, {fetchAllPosts, votePost})(PostList)
+export default connect(mapStateToProps, {
+                fetchAllPosts,
+                fetchCommentsById,
+                votePost})(PostList)

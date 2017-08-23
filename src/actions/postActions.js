@@ -82,7 +82,7 @@ export const votePost = (postId, option) => {
         body: JSON.stringify({option})})
     .then(res => res.json())
     .then(post => {
-      dispatch({type: VOTE_POST, post})
+      dispatch({type: VOTE_POST, postId, option })
     })
   }
 }
