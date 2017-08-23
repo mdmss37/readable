@@ -3,15 +3,29 @@ import {
   CREATE_COMMENT,
   UPDATE_COMMENT,
   DELETE_COMMENT,
-  UPVOTE_COMMENT,
-  DOWNVOTE_COMMENT
+  VOTE_COMMENT
 } from '../actions/commentActions'
 
 function comments(state={}, action) {
-  const { comments, postId } = action
+  const { comments, postId, commentId, parentId, option, voteScore} = action
   switch(action.type) {
     case GET_COMMENTS:
       return Object.assign({}, state, {[postId]: comments})
+    case VOTE_COMMENT:
+
+      return {
+        ...state,
+        [parentId]: state[parentId].map(comment => {
+          if(comment.id === commentId) {
+            if (option === "upVote") {
+              comment.voteScore += 1
+            } else {
+              comment.voteScore -= 1
+            }
+          }
+          return comment
+        })
+      }
     default:
     return state
   }

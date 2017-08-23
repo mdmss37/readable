@@ -1,14 +1,11 @@
-import * as ReadableAPI from '../utils/ReadableAPI'
+import {apiUrl} from '../utils/ReadableAPI'
 
 export const RECEIVE_COMMENTS = 'RECEIVE_COMMENTS'
 export const GET_COMMENTS = 'GET_COMMENTS'
 export const CREATE_COMMENT = 'CREATE_COMMENT'
 export const UPDATE_COMMENT = 'UPDATE_COMMENT'
 export const DELETE_COMMENT = 'DELETE_COMMENT'
-export const UPVOTE_COMMENT = 'UPVOTE_COMMENT'
-export const DOWNVOTE_COMMENT = 'DOWNVOTE_COMMENT'
-
-const api = 'http://localhost:5001'
+export const VOTE_COMMENT = 'VOTE_COMMENT'
 
 let token = localStorage.token
 
@@ -17,21 +14,13 @@ if (!token)
 
 const headers = {
   'Accept': 'application/json',
-  'Authorization': token,
+  'Authorization': 'whatever',
   'Content-Type': 'application/json'
 }
 
-// export function receiveComments(comments, post_id) {
-//   return {
-//     type: RECEIVE_COMMENTS,
-//     comments: comments,
-//     post_id: post_id
-//   }
-// }
-
 export const fetchCommentsById = (postId) => {
   return (dispatch) => {
-    fetch(`${api}/posts/${postId}/comments`, { headers })
+    fetch(`${apiUrl}/posts/${postId}/comments`, { headers })
       .then(res => res.json())
       .then(comments => {
         dispatch({type: GET_COMMENTS, postId, comments })
@@ -39,17 +28,15 @@ export const fetchCommentsById = (postId) => {
   }
 }
 
-// import { createRequestHeaders, hostOrigin } from '../utils/helpers'
-// import * as actionTypes from './actionTypes'
-
-// export const fetchPostComments = (postId) => {
-//   return (dispatch) => {
-//     const headers = createRequestHeaders()
-
-//     fetch(`${hostOrigin}/posts/${postId}/comments`, { headers })
-//       .then(response => response.json())
-//       .then(comments => {
-//         dispatch({ type: actionTypes.GET_COMMENTS, postId, comments })
-//       })
-//   }
-// }
+export const voteComment = (commentId, parentId, voteScore, option) => {
+  return (dispatch) => {
+    fetch(`${apiUrl}/comments/${commentId}`, {
+      method: 'POST',
+      headers: headers,
+      body: JSON.stringify({option})})
+    .then(res => res.json())
+    .then(comment => {
+      dispatch({type: VOTE_COMMENT, commentId, parentId, voteScore, option})
+    })
+  }
+}

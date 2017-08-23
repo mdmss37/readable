@@ -1,11 +1,12 @@
 import React, {Component} from 'react'
+import { connect }  from 'react-redux'
 import { formatTimestamp}  from '../utils/helpers'
 import { fetchAllPosts, votePost} from '../actions/postActions'
 import FaCaretUp from 'react-icons/lib/fa/caret-up'
 import FaCaretDown from 'react-icons/lib/fa/caret-down'
+import { voteComment } from '../actions/commentActions'
 
 class Comments extends Component {
-
 
   render() {
     const {comments} = this.props
@@ -22,11 +23,11 @@ class Comments extends Component {
           <div className="post" key={comment.id}>
             <div className="post-votes">
               <FaCaretUp size={30} className="caret-up" onClick={() => {
-                votePost(comment.id, "upVote")
+                this.props.voteComment(comment.id, comment.parentId, comment.voteScore, "upVote")
               }}/>
               <p>{comment.voteScore}</p>
               <FaCaretDown size={30} className="caret-down" onClick={() => {
-                votePost(comment.id, "downVote")
+                this.props.voteComment(comment.id, comment.parentId, comment.voteScore, "downVote")
               }}/>
             </div>
             <div className="post-description">
@@ -44,4 +45,4 @@ class Comments extends Component {
     )}
 }
 
-export default Comments
+export default connect(null, {voteComment})(Comments)
