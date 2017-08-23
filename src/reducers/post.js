@@ -19,9 +19,7 @@ function posts(state=[], action) {
     case GET_POSTS:
       return action.posts.filter(post => !(post.deleted))
     case CREATE_POST:
-      return {
-        ...state, posts: state.posts.concat([post])
-      }
+      return state.concat([post])
     case UPDATE_POST:
       return state
     case DELETE_POST:

@@ -1,6 +1,6 @@
 import {apiUrl} from '../utils/ReadableAPI'
 
-export const RECEIVE_POSTS = 'RECEIVE_POSTS'
+// export const RECEIVE_POSTS = 'RECEIVE_POSTS'
 export const GET_POSTS = 'GET_POSTS'
 export const CREATE_POST = 'CREATE_POST'
 export const UPDATE_POST = 'UPDATE_POST'
@@ -18,12 +18,12 @@ const headers = {
   'Content-Type': 'application/json'
 }
 
-export function receiveAllPosts(posts) {
-  return {
-    type: RECEIVE_POSTS,
-    posts: posts
-  }
-}
+// export function receiveAllPosts(posts) {
+//   return {
+//     type: RECEIVE_POSTS,
+//     posts: posts
+//   }
+// }
 
 export const fetchAllPosts = () => {
   return (dispatch) => {
@@ -53,9 +53,7 @@ export const createPost = (post, callback) => {
       body: JSON.stringify(post)
     })
     .then(() => callback())
-    dispatch => {
-      dispatch({type: CREATE_POST, post})
-    }
+    dispatch({type: CREATE_POST, post})
   }
 }
 
@@ -72,9 +70,7 @@ export const deletePost = (postId, callback) => {
         method: 'DELETE',
         headers: headers})
     .then(() => callback())
-    dispatch => {
-      dispatch({type: DELETE_POST, postId})
-    }
+    dispatch({type: DELETE_POST, postId})
   }
 }
 
