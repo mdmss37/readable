@@ -54,11 +54,11 @@ class SubmitForm extends Component {
   }
 }
 
-function mapStateToProps({ posts, categoryReducer }) {
+function mapStateToProps({ posts, categories }) {
   console.log("state", this.state)
   return {
     posts: posts,
-    categories: categoryReducer.categories
+    categories: categories
   }
 }
 

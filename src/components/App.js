@@ -36,10 +36,10 @@ class App extends Component {
   handleChange = (e) => {
     const selectedCategory = e.target.value
     if (selectedCategory === "none") {
-      fetchAllPosts()(this.props.dispatch)
+      this.props.fetchAllPosts()
     } else {
       console.log(selectedCategory)
-      fetchPostsByCategory(selectedCategory)(this.props.dispatch)
+      this.props.fetchPostsByCategory(selectedCategory)
     }
   }
 
@@ -90,5 +90,8 @@ function mapStateToProps({categories}) {
 
 // https://stackoverflow.com/questions/45056150/react-router-v4-not-working-with-redux
 // https://reacttraining.com/react-router/web/guides/redux-integration
-export default withRouter(connect(mapStateToProps, {fetchAllcategories})(App))
+export default withRouter(connect(mapStateToProps, {
+                fetchAllPosts,
+                fetchAllcategories,
+                fetchPostsByCategory})(App))
 

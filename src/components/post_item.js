@@ -16,7 +16,7 @@ class PostItem extends Component {
   }
 
   render() {
-    const {post, comments, votePost, deletePost} = this.props
+    const {post, comments, votePost, deletePost, fetchAllPosts} = this.props
 
     return(
       <div>
@@ -25,14 +25,18 @@ class PostItem extends Component {
           <div className="post-votes">
             <FaCaretUp size={30} className="caret-up" onClick={() => {
               votePost(post.id, "upVote")
+              fetchAllPosts()
             }}/>
             <p>{post.voteScore}</p>
             <FaCaretDown size={30} className="caret-down" onClick={() => {
               votePost(post.id, "downVote")
+              fetchAllPosts()
             }}/>
           </div>
           <div className="post-description">
-            <div className="post-title"><h3>{post.title}</h3></div>
+            <Link to={{pathname: `post/${post.id}`}}>
+              <div className="post-title"><h3>{post.title}</h3></div>
+            </Link>
             <div className="post-body"><p>{post.body}</p></div>
           </div>
           <div className="post-detail">

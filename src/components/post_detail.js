@@ -26,7 +26,7 @@ class PostDetail extends Component {
   }
 
   render() {
-    const {post, comments, votePost, deletePost} = this.props
+    const {post, comments, votePost, deletePost, fetchAllPosts} = this.props
 
     return(
       <div>
@@ -35,10 +35,12 @@ class PostDetail extends Component {
           <div className="post-votes">
             <FaCaretUp size={30} className="caret-up" onClick={() => {
               votePost(post.id, "upVote")
+              fetchAllPosts()
             }}/>
             <p>{post.voteScore}</p>
             <FaCaretDown size={30} className="caret-down" onClick={() => {
               votePost(post.id, "downVote")
+              fetchAllPosts()
             }}/>
           </div>
           <div className="post-description">
