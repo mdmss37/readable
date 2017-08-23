@@ -9,20 +9,10 @@ import { fetchCommentsById } from '../actions/commentActions'
 import { fetchAllPosts, votePost, deletePost } from '../actions/postActions'
 import Comments from './comments'
 
-class PostDetail extends Component {
+class PostItem extends Component {
   componentDidMount() {
-    const {post, match, fetchAllPosts, fetchCommentsById } = this.props
-    fetchAllPosts()
-    console.log("fetchCommentsById", fetchCommentsById(match.params.postId))
-    fetchCommentsById(match.params.postId)
-  }
-
-  onDeleteClick = () => {
-    const id = this.props.match.params.postId
-    console.log("onDeleteClick, id:", id)
-    this.props.deletePost(id, () => {
-      this.props.history.push('/')
-    })
+    const { post, fetchCommentsById } = this.props
+    fetchCommentsById(post.id)
   }
 
   render() {
@@ -31,7 +21,7 @@ class PostDetail extends Component {
     return(
       <div>
         {post && (
-        <div className="post" key={post.id}>
+        <div className="post">
           <div className="post-votes">
             <FaCaretUp size={30} className="caret-up" onClick={() => {
               votePost(post.id, "upVote")
@@ -50,22 +40,17 @@ class PostDetail extends Component {
             <div className="post-author"><p>{post.author} at {formatTimestamp(post.timestamp)}</p></div>
             <div className="post-comment"><p>Number of Comments: {comments && comments ? comments.length : 0}</p></div>
           </div>
-          <div>
-            <button onClick={(e) => this.onDeleteClick(e)}>Delete Post</button>
-          </div>
         </div>
       )}
-      {comments && <Comments comments={comments}/>}
       </div>
     )
   }
 }
 
-function mapStateToProps({ posts, comments }, {match}) {
+function mapStateToProps({ comments }, {post}) {
   // console.log("ownProps", ownProps)
   return {
-    post: _.find(posts, {id: match.params.postId }),
-    comments: comments[match.params.postId]
+    comments: comments[post.id]
   }
 }
 
@@ -74,7 +59,7 @@ export default connect(mapStateToProps, {
                 fetchCommentsById,
                 votePost,
                 deletePost
-                })(PostDetail)
+                })(PostItem)
 
 
 

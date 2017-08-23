@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import FaCaretUp from 'react-icons/lib/fa/caret-up'
 import FaCaretDown from 'react-icons/lib/fa/caret-down'
-import PostDetail from '../components/post_detail'
+import PostItem from '../components/post_item'
 import { formatTimestamp }  from '../utils/helpers'
 import { connect }  from 'react-redux'
 import { Link, Route, withRouter } from 'react-router-dom'
@@ -13,6 +13,7 @@ class PostList extends Component {
   static propTypes = {
     posts: PropTypes.array
   }
+
   componentDidMount() {
     console.log("componentDidMount from PostList", this.props)
     this.props.fetchAllPosts()
@@ -30,38 +31,17 @@ class PostList extends Component {
     return (
       <div>
         {posts.map(post => (
-          <div className="post" key={post.id}>
-            <div className="post-votes">
-              <FaCaretUp size={30} className="caret-up" onClick={() => {
-                votePost(post.id, "upVote")
-              }}/>
-              <p>{post.voteScore}</p>
-              <FaCaretDown size={30} className="caret-down" onClick={() => {
-                votePost(post.id, "downVote")
-              }}/>
-            </div>
-            <div className="post-description">
-              <Link to={`/post/${post.id}`}>
-                <div className="post-title"><h3>{post.title}</h3></div>
-              </Link>
-              <div className="post-body"><p>{post.body}</p></div>
-            </div>
-            <div className="post-detail">
-              <div className="post-category"><p>Category: {post.category}</p></div>
-              <div className="post-author"><p>{post.author} at {formatTimestamp(post.timestamp)}</p></div>
-              <div className="post-comment"><p>Number of Comments {comments && comments[post.id] ? comments[post.id].length : 0}</p></div>
-            </div>
-          </div>
+          <PostItem key={post.id} post={post}/>
         ))}
       </div>
     )
   }
 }
-function mapStateToProps({ posts, comments }) {
+
+function mapStateToProps({ posts }) {
   console.log("state from PostList", this.state)
   return {
-    posts: posts,
-    comments: comments
+    posts: posts
   }
 }
 

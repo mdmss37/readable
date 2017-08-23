@@ -18,7 +18,7 @@ class Comments extends Component {
       <div>
       <h2>Comments</h2>
       {comments.map(comment => (
-        <div>
+        <div key={comment.id}>
           {comment && (
           <div className="post" key={comment.id}>
             <div className="post-votes">
