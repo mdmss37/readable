@@ -91,6 +91,15 @@
   color: #fbf10f;
 }*/
 /*Form CSS*/
+.button-action {
+  display: flex;
+  flex-direction: column;
+}
+
+button {
+  margin: 5px 20px;
+}
+
 .comment {
   height: 150px;
   display: -webkit-flex;

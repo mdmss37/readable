@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import FaCaretUp from 'react-icons/lib/fa/caret-up'
-import FaCaretDown from 'react-icons/lib/fa/caret-down'
+// import FaCaretUp from 'react-icons/lib/fa/caret-up'
+// import FaCaretDown from 'react-icons/lib/fa/caret-down'
 import PostItem from '../components/post_item'
-import { formatTimestamp }  from '../utils/helpers'
+// import { formatTimestamp }  from '../utils/helpers'
 import { connect }  from 'react-redux'
-import { Link, Route, withRouter } from 'react-router-dom'
+// import { Link, Route, withRouter } from 'react-router-dom'
 import { fetchAllPosts, votePost} from '../actions/postActions'
 import { fetchCommentsById } from '../actions/commentActions'
 
@@ -24,7 +24,7 @@ class PostList extends Component {
 
   render() {
     console.log("From PostList, posts:", this.props.posts)
-    const {posts, comments, votePost} = this.props
+    const {posts} = this.props
     if(!posts) {
       return <div>Loading...</div>
     }

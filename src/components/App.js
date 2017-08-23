@@ -14,7 +14,8 @@ import { fetchAllcategories } from '../actions/categoryActions'
 // import FaCaretDown from 'react-icons/lib/fa/caret-down'
 import FaPencil from 'react-icons/lib/fa/pencil'
 import FaHome from 'react-icons/lib/fa/home'
-import SubmitForm from './form'
+import SubmitForm from './form_submit'
+import EditForm from './form_edit'
 import PostList from '../container/post_list'
 import PostDetail from './post_detail'
 
@@ -45,7 +46,7 @@ class App extends Component {
 
   render() {
     console.log("this.props:", this.props.comments)
-    const {posts, categories, comments } = this.props
+    const {categories} = this.props
 
     return (
       <div className="App">
@@ -72,6 +73,7 @@ class App extends Component {
           <Route exact path="/new" component={SubmitForm}/>
           <Route
             exact path="/post/:postId" component={PostDetail}/>
+          <Route path="/post/:postId/edit" component={EditForm}/>
         </Switch>
 
       </div>

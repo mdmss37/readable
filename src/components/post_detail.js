@@ -3,15 +3,15 @@ import React, { Component } from 'react';
 import { connect }  from 'react-redux'
 import FaCaretUp from 'react-icons/lib/fa/caret-up'
 import FaCaretDown from 'react-icons/lib/fa/caret-down'
-import { formatTimestamp, guid }  from '../utils/helpers'
-import { Link, Route, withRouter } from 'react-router-dom'
+import { formatTimestamp }  from '../utils/helpers'
+import { Link } from 'react-router-dom'
 import { fetchCommentsById } from '../actions/commentActions'
 import { fetchAllPosts, votePost, deletePost } from '../actions/postActions'
 import Comments from './comments'
 
 class PostDetail extends Component {
   componentDidMount() {
-    const {post, match, fetchAllPosts, fetchCommentsById } = this.props
+    const { match, fetchAllPosts, fetchCommentsById } = this.props
     fetchAllPosts()
     console.log("fetchCommentsById", fetchCommentsById(match.params.postId))
     fetchCommentsById(match.params.postId)
@@ -52,7 +52,13 @@ class PostDetail extends Component {
             <div className="post-author"><p>{post.author} at {formatTimestamp(post.timestamp)}</p></div>
             <div className="post-comment"><p>Number of Comments: {comments && comments ? comments.length : 0}</p></div>
           </div>
-          <div>
+          <div className="button-action">
+
+            <Link to={`/post/${post.id}/edit`}>
+              <button>Edit Post</button>
+            </Link>
+
+            <button>Create Comment</button>
             <button onClick={(e) => this.onDeleteClick(e)}>Delete Post</button>
           </div>
         </div>
