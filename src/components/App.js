@@ -14,8 +14,9 @@ import { fetchAllcategories } from '../actions/categoryActions'
 // import FaCaretDown from 'react-icons/lib/fa/caret-down'
 import FaPencil from 'react-icons/lib/fa/pencil'
 import FaHome from 'react-icons/lib/fa/home'
-import SubmitForm from './form_submit'
-import EditForm from './form_edit'
+import PostSubmitForm from './post_form_submit'
+import CommentSubmitForm from './comment_form_submit'
+import PostEditForm from './post_form_edit'
 import PostList from '../container/post_list'
 import PostDetail from './post_detail'
 
@@ -70,10 +71,11 @@ class App extends Component {
 
         <Switch>
           <Route exact path="/" component={PostList}/>
-          <Route exact path="/new" component={SubmitForm}/>
+          <Route exact path="/new" component={PostSubmitForm}/>
           <Route
             exact path="/post/:postId" component={PostDetail}/>
-          <Route path="/post/:postId/edit" component={EditForm}/>
+          <Route path="/post/:postId/edit" component={PostEditForm}/>
+          <Route path="/post/:postId/comment" component={CommentSubmitForm}/>
         </Switch>
 
       </div>

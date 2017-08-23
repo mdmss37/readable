@@ -4,7 +4,7 @@ import { connect }  from 'react-redux'
 import FaCaretUp from 'react-icons/lib/fa/caret-up'
 import FaCaretDown from 'react-icons/lib/fa/caret-down'
 import { formatTimestamp }  from '../utils/helpers'
-import { Link } from 'react-router-dom'
+import { Link, withRouter, Route } from 'react-router-dom'
 import { fetchCommentsById } from '../actions/commentActions'
 import { fetchAllPosts, votePost, deletePost } from '../actions/postActions'
 import Comments from './comments'
@@ -19,7 +19,6 @@ class PostDetail extends Component {
 
   onDeleteClick = () => {
     const id = this.props.match.params.postId
-    console.log("onDeleteClick, id:", id)
     this.props.deletePost(id, () => {
       this.props.history.push('/')
     })
@@ -57,8 +56,10 @@ class PostDetail extends Component {
             <Link to={`/post/${post.id}/edit`}>
               <button>Edit Post</button>
             </Link>
+            <Link to={`/post/${post.id}/comment`}>
+              <button>Create Comment</button>
+            </Link>
 
-            <button>Create Comment</button>
             <button onClick={(e) => this.onDeleteClick(e)}>Delete Post</button>
           </div>
         </div>

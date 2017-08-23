@@ -6,7 +6,7 @@ import { fetchAllPosts, updatePost } from '../actions/postActions'
 import { formatTimestamp, guid }  from '../utils/helpers'
 
 // TODO: http://redux-form.com/6.7.0/docs/faq/HowToConnect.md/
-class EditForm extends Component {
+class PostEditForm extends Component {
   componentDidMount() {
     this.props.fetchAllPosts()
   }
@@ -33,12 +33,12 @@ class EditForm extends Component {
           <ul className="form-style-1">
             <li>
               <label>Title <span className="required">*</span></label>
-              <input placeholder={post.title} type="text" name="title" className="field-long" />
+              <input defaultValue={post.title} type="text" name="title" className="field-long" />
             </li>
 
             <li>
               <label>Your Post here <span className="required">*</span></label>
-              <textarea placeholder={post.body} name="body" id="field5" className="field-long field-textarea"></textarea>
+              <textarea defaultValue={post.body} name="body" id="field5" className="field-long field-textarea"></textarea>
             </li>
             <button>Update Post</button>
           </ul>
@@ -61,5 +61,5 @@ function mapStateToProps({ posts }, {match}) {
 // https://stackoverflow.com/questions/42123261/programmatically-navigate-using-react-router-v4
 export default connect(mapStateToProps, {
                 fetchAllPosts,
-                updatePost})(EditForm)
+                updatePost})(PostEditForm)
 

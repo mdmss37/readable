@@ -28,6 +28,30 @@ export const fetchCommentsById = (postId) => {
   }
 }
 
+export const createComment = (comment, postId, callback) => {
+  return (dispatch) => {
+    fetch(`${apiUrl}/comments`, {
+      method: 'POST',
+      headers: headers,
+      body: JSON.stringify(comment)})
+    .then(res => res.json())
+    .then(comment => {
+      dispatch({type: CREATE_COMMENT, postId, comment})
+    })
+    .then(() => callback())
+  }
+}
+
+export const deleteComment = (commentId) => {
+  return (dispatch) => {
+    fetch(`${apiUrl}/comments/${commentId}`, {
+      method: 'DELETE',
+      headers: headers})
+    .then(res => res.json())
+    dispatch({type: DELETE_COMMENT, commentId})
+  }
+}
+
 export const voteComment = (commentId, parentId, voteScore, option) => {
   return (dispatch) => {
     fetch(`${apiUrl}/comments/${commentId}`, {

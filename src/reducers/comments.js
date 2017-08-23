@@ -7,12 +7,12 @@ import {
 } from '../actions/commentActions'
 
 function comments(state={}, action) {
-  const { comments, postId, commentId, parentId, option, voteScore} = action
+  const { comments, postId, commentId,
+    parentId, option, voteScore, comment} = action
   switch(action.type) {
     case GET_COMMENTS:
       return Object.assign({}, state, {[postId]: comments})
     case VOTE_COMMENT:
-
       return {
         ...state,
         [parentId]: state[parentId].map(comment => {
@@ -26,6 +26,10 @@ function comments(state={}, action) {
           return comment
         })
       }
+    case CREATE_COMMENT:
+      return Object.assign({}, state, {[postId]: comments})
+    case DELETE_COMMENT:
+      return state
     default:
     return state
   }

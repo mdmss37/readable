@@ -1,12 +1,20 @@
 import React, {Component} from 'react'
 import { connect }  from 'react-redux'
 import { formatTimestamp}  from '../utils/helpers'
+import { Link, Route, withRouter } from 'react-router-dom'
 import { fetchAllPosts, votePost} from '../actions/postActions'
 import FaCaretUp from 'react-icons/lib/fa/caret-up'
 import FaCaretDown from 'react-icons/lib/fa/caret-down'
-import { voteComment } from '../actions/commentActions'
+import { voteComment, deleteComment, fetchCommentsById } from '../actions/commentActions'
 
 class Comments extends Component {
+
+  onDeleteClick = (comment) => {
+    const commentId = comment.id
+    const postId = comment.parentId
+    this.props.deleteComment(commentId)
+    this.props.fetchCommentsById(postId)
+  }
 
   render() {
     const {comments} = this.props
@@ -36,7 +44,12 @@ class Comments extends Component {
             <div className="post-detail">
               <div className="post-author"><p>{comment.author} at {formatTimestamp(comment.timestamp)}</p></div>
             </div>
+            <div className="button-action">
+              <button>Edit Comment</button>
+              <button onClick={() => this.onDeleteClick(comment)}>Delete Comment</button>
+            </div>
           </div>
+
         )}
         </div>
         ))}
@@ -44,4 +57,14 @@ class Comments extends Component {
     )}
 }
 
-export default connect(null, {voteComment})(Comments)
+function mapStateToProps({ posts }) {
+  // console.log("ownProps", ownProps)
+  return {
+    posts: posts
+  }
+}
+
+export default connect(mapStateToProps, {
+                voteComment,
+                deleteComment,
+                fetchCommentsById})(Comments)
