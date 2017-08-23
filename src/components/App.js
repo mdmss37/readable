@@ -27,7 +27,8 @@ class App extends Component {
   componentDidMount() {
     // this.props.dispatch(fetchAllPosts())
     // fetchAllPosts()(this.props.dispatch)
-    fetchAllcategories()(this.props.dispatch)
+    console.log("componentDidMount")
+    this.props.fetchAllcategories()
     // this.props.posts
     // fetchCommentsById({id: "8xf0y6ziyjabvozdd253nd" })(this.props.dispatch)
   }
@@ -79,15 +80,15 @@ class App extends Component {
 }
 
 // map Redux state to this.props
-function mapStateToProps({categoryReducer}) {
-  console.log("state", this.state)
+function mapStateToProps({categories}) {
+  console.log("categories from App", categories)
   return {
     // posts: postsReducer.posts,
-    categories: categoryReducer.categories
+    categories: categories
   }
 }
 
 // https://stackoverflow.com/questions/45056150/react-router-v4-not-working-with-redux
 // https://reacttraining.com/react-router/web/guides/redux-integration
-export default withRouter(connect(mapStateToProps)(App))
+export default withRouter(connect(mapStateToProps, {fetchAllcategories})(App))
 

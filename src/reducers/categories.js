@@ -1,15 +1,15 @@
 import {
-  RECEIVE_CATEGORIES,
+  GET_CATEGORIES,
 } from '../actions/categoryActions'
 
-function categoryReducer(state={}, action) {
-  const { categories } = action
+function categories(state=[], action) {
+  const { defaultData } = action
   switch(action.type) {
-    case RECEIVE_CATEGORIES:
-      return {...state, categories: categories}
+    case GET_CATEGORIES:
+      return defaultData.categories
     default:
       return state
   }
 }
 
-export default categoryReducer
+export default categories
