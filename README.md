@@ -1,5 +1,5 @@
 This project is project for Udacity React nanodegree.
-##How to run the app
+## How to run the app
 1. Clone or copy repository
 2. inside top level of repository, run `npm install`
 3. go to reactnd-project-readable-starter folder and run `npm install` and run `node server`. this is local server on port 5001
