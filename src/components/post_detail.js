@@ -10,12 +10,11 @@ import { fetchAllPosts, votePost, deletePost } from '../actions/postActions'
 import Comments from './comments'
 
 class PostDetail extends Component {
-  // componentDidMount() {
-  //   const { match, fetchAllPosts, fetchCommentsById } = this.props
-  //   fetchAllPosts()
-  //   console.log("fetchCommentsById", fetchCommentsById(match.params.postId))
-  //   fetchCommentsById(match.params.postId)
-  // }
+  componentDidMount() {
+    const { match, fetchAllPosts, fetchCommentsById } = this.props
+    fetchAllPosts()
+    fetchCommentsById(match.params.postId)
+  }
 
   onDeleteClick = () => {
     const id = this.props.match.params.postId

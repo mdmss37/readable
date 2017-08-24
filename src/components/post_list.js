@@ -26,7 +26,6 @@ class PostList extends Component {
   }
 
   render() {
-    console.log("From PostList, posts:", this.props.posts)
     const {posts} = this.props
     if(!posts) {
       return <div>Loading...</div>

@@ -11,7 +11,7 @@ class PostSubmitForm extends Component {
     e.preventDefault()
     const submitPost = {
       id: guid(),
-      timestamp: new Date.now(),
+      timestamp: Date.now(),
       title: e.target.title.value,
       body: e.target.body.value,
       author: e.target.author.value,
