@@ -9,6 +9,7 @@ import { voteComment, deleteComment, fetchCommentsById } from '../actions/commen
 
 class Comments extends Component {
 
+  // How to use history? does not work well
   onDeleteClick = (comment) => {
     const commentId = comment.id
     const postId = comment.parentId

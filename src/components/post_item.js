@@ -34,7 +34,7 @@ class PostItem extends Component {
             }}/>
           </div>
           <div className="post-description">
-            <Link to={{pathname: `post/${post.id}`}}>
+            <Link to={`/${post.category}/${post.id}`}>
               <div className="post-title"><h3>{post.title}</h3></div>
             </Link>
             <div className="post-body"><p>{post.body}</p></div>

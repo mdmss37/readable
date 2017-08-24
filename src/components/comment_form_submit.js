@@ -33,13 +33,10 @@ class CommentSubmitForm extends Component {
             <input type="text" name="author" className="field-long" />
           </li>
           <li>
-
-          </li>
-          <li>
             <label>Your Comment here <span className="required">*</span></label>
             <textarea name="body" id="field5" className="field-long field-textarea"></textarea>
           </li>
-          <button>Submit Post</button>
+          <button>Submit Comment</button>
         </ul>
       </form>
     )

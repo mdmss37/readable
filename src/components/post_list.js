@@ -6,7 +6,7 @@ import PostItem from '../components/post_item'
 // import { formatTimestamp }  from '../utils/helpers'
 import { connect }  from 'react-redux'
 // import { Link, Route, withRouter } from 'react-router-dom'
-import { fetchAllPosts, votePost} from '../actions/postActions'
+import { fetchAllPosts, fetchPostsByCategory, votePost} from '../actions/postActions'
 import { fetchCommentsById } from '../actions/commentActions'
 
 class PostList extends Component {
@@ -15,10 +15,12 @@ class PostList extends Component {
   }
 
   componentDidMount() {
-    console.log("componentDidMount from PostList", this.props)
-    this.props.fetchAllPosts()
-    for (const post of this.props.posts) {
-        this.props.fetchCommentsById(post.id)
+    const path = this.props.match.params.category
+    console.log(path)
+    if(path) {
+      this.props.fetchPostsByCategory(path)
+    } else {
+      this.props.fetchAllPosts()
     }
   }
 
@@ -47,5 +49,6 @@ function mapStateToProps({ posts }) {
 
 export default connect(mapStateToProps, {
                 fetchAllPosts,
+                fetchPostsByCategory,
                 fetchCommentsById,
                 votePost})(PostList)

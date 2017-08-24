@@ -17,7 +17,7 @@ import FaHome from 'react-icons/lib/fa/home'
 import PostSubmitForm from './post_form_submit'
 import CommentSubmitForm from './comment_form_submit'
 import PostEditForm from './post_form_edit'
-import PostList from '../container/post_list'
+import PostList from './post_list'
 import PostDetail from './post_detail'
 
 class App extends Component {
@@ -29,7 +29,7 @@ class App extends Component {
   componentDidMount() {
     // this.props.dispatch(fetchAllPosts())
     // fetchAllPosts()(this.props.dispatch)
-    console.log("componentDidMount")
+    // console.log("componentDidMount")
     this.props.fetchAllcategories()
     // this.props.posts
     // fetchCommentsById({id: "8xf0y6ziyjabvozdd253nd" })(this.props.dispatch)
@@ -38,9 +38,11 @@ class App extends Component {
   handleChange = (e) => {
     const selectedCategory = e.target.value
     if (selectedCategory === "none") {
+      this.props.history.push("/")
       this.props.fetchAllPosts()
     } else {
       console.log(selectedCategory)
+      this.props.history.push(`/${selectedCategory}`)
       this.props.fetchPostsByCategory(selectedCategory)
     }
   }
@@ -72,8 +74,10 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={PostList}/>
           <Route exact path="/new" component={PostSubmitForm}/>
+          <Route exact path="/:category" component={PostList}/>
+
           <Route
-            exact path="/post/:postId" component={PostDetail}/>
+            exact path="/:category/:postId" component={PostDetail}/>
           <Route path="/post/:postId/edit" component={PostEditForm}/>
           <Route path="/post/:postId/comment" component={CommentSubmitForm}/>
         </Switch>
