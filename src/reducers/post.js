@@ -5,8 +5,8 @@
 // Do not produce side effects
 
 import {
-  RECEIVE_POSTS,
   GET_POSTS,
+  GET_CATEGORY_POSTS,
   CREATE_POST,
   UPDATE_POST,
   DELETE_POST,
@@ -17,7 +17,9 @@ function posts(state=[], action) {
   const { posts, post, postId, updatedPost } = action
   switch(action.type) {
     case GET_POSTS:
-      return action.posts.filter(post => !(post.deleted))
+      return posts.filter(post => !(post.deleted))
+    case GET_CATEGORY_POSTS:
+      return posts.filter(post => !(post.deleted))
     case CREATE_POST:
       return state.concat([post])
     case UPDATE_POST:

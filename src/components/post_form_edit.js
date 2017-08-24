@@ -1,15 +1,14 @@
 import _ from 'lodash'
 import React, { Component } from 'react';
 import { connect }  from 'react-redux'
-import { Link, Route, withRouter } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { fetchAllPosts, updatePost } from '../actions/postActions'
-import { formatTimestamp, guid }  from '../utils/helpers'
 
 // TODO: http://redux-form.com/6.7.0/docs/faq/HowToConnect.md/
 class PostEditForm extends Component {
-  componentDidMount() {
-    this.props.fetchAllPosts()
-  }
+  // componentDidMount() {
+  //   this.props.fetchAllPosts()
+  // }
 
   handleSubmit = (e) => {
     e.preventDefault()

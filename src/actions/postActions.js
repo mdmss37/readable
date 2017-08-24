@@ -2,6 +2,7 @@ import {apiUrl} from '../utils/ReadableAPI'
 
 // export const RECEIVE_POSTS = 'RECEIVE_POSTS'
 export const GET_POSTS = 'GET_POSTS'
+export const GET_CATEGORY_POSTS = 'GET_CATEGORY_POSTS'
 export const CREATE_POST = 'CREATE_POST'
 export const UPDATE_POST = 'UPDATE_POST'
 export const DELETE_POST = 'DELETE_POST'
@@ -40,7 +41,7 @@ export const fetchPostsByCategory = (category) => {
     fetch(`${apiUrl}/${category}/posts`, {headers})
     .then(res => res.json())
     .then(posts => {
-      dispatch({type: GET_POSTS, posts})
+      dispatch({type: GET_CATEGORY_POSTS, posts})
     })
   }
 }

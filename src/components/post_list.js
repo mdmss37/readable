@@ -15,13 +15,14 @@ class PostList extends Component {
   }
 
   componentDidMount() {
-    const path = this.props.match.params.category
-    console.log(path)
-    if(path) {
-      this.props.fetchPostsByCategory(path)
-    } else {
-      this.props.fetchAllPosts()
-    }
+    this.props.fetchAllPosts()
+    // const path = this.props.match.params.category
+    // console.log("Path from Post List", path)
+    // if(path !== undefined) {
+    //   this.props.fetchPostsByCategory(path)
+    // } else {
+    //   this.props.fetchAllPosts()
+    // }
   }
 
   render() {
@@ -40,10 +41,10 @@ class PostList extends Component {
   }
 }
 
-function mapStateToProps({ posts }) {
-  console.log("state from PostList", this.state)
+function mapStateToProps({ posts }, {match}) {
+  const category = match.params.category
   return {
-    posts: posts
+    posts: category ? posts.filter(post => post.category === category) : posts
   }
 }
 

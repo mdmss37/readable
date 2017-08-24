@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect }  from 'react-redux'
-import { Link, Route, withRouter } from 'react-router-dom'
-import { fetchAllPosts, createPost} from '../actions/postActions'
-import { formatTimestamp, guid }  from '../utils/helpers'
+// import { Link, Route, withRouter } from 'react-router-dom'
+import { createPost} from '../actions/postActions'
+import { guid }  from '../utils/helpers'
 
 // TODO: http://redux-form.com/6.7.0/docs/faq/HowToConnect.md/
 class PostSubmitForm extends Component {
@@ -17,7 +17,6 @@ class PostSubmitForm extends Component {
       author: e.target.author.value,
       category: e.target.category.value,
     }
-    console.log(submitPost)
     this.props.createPost(submitPost, () => this.props.history.push('/') )
   }
 

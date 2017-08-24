@@ -1,6 +1,5 @@
 import {apiUrl} from '../utils/ReadableAPI'
 
-export const RECEIVE_COMMENTS = 'RECEIVE_COMMENTS'
 export const GET_COMMENTS = 'GET_COMMENTS'
 export const CREATE_COMMENT = 'CREATE_COMMENT'
 export const UPDATE_COMMENT = 'UPDATE_COMMENT'

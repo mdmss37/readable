@@ -4,18 +4,18 @@ import { connect }  from 'react-redux'
 import FaCaretUp from 'react-icons/lib/fa/caret-up'
 import FaCaretDown from 'react-icons/lib/fa/caret-down'
 import { formatTimestamp }  from '../utils/helpers'
-import { Link, withRouter, Route } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { fetchCommentsById } from '../actions/commentActions'
 import { fetchAllPosts, votePost, deletePost } from '../actions/postActions'
 import Comments from './comments'
 
 class PostDetail extends Component {
-  componentDidMount() {
-    const { match, fetchAllPosts, fetchCommentsById } = this.props
-    fetchAllPosts()
-    console.log("fetchCommentsById", fetchCommentsById(match.params.postId))
-    fetchCommentsById(match.params.postId)
-  }
+  // componentDidMount() {
+  //   const { match, fetchAllPosts, fetchCommentsById } = this.props
+  //   fetchAllPosts()
+  //   console.log("fetchCommentsById", fetchCommentsById(match.params.postId))
+  //   fetchCommentsById(match.params.postId)
+  // }
 
   onDeleteClick = () => {
     const id = this.props.match.params.postId

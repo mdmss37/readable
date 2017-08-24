@@ -35,20 +35,19 @@ class App extends Component {
     // fetchCommentsById({id: "8xf0y6ziyjabvozdd253nd" })(this.props.dispatch)
   }
 
-  handleChange = (e) => {
-    const selectedCategory = e.target.value
-    if (selectedCategory === "none") {
-      this.props.history.push("/")
-      this.props.fetchAllPosts()
-    } else {
-      console.log(selectedCategory)
-      this.props.history.push(`/${selectedCategory}`)
-      this.props.fetchPostsByCategory(selectedCategory)
-    }
-  }
+  // handleChange = (e) => {
+  //   const selectedCategory = e.target.value
+  //   if (selectedCategory === "none") {
+  //     this.props.history.push("/")
+  //     this.props.fetchAllPosts()
+  //   } else {
+  //     console.log(selectedCategory)
+  //     this.props.history.push(`/${selectedCategory}`)
+  //     this.props.fetchPostsByCategory(selectedCategory)
+  //   }
+  // }
 
   render() {
-    console.log("this.props:", this.props.comments)
     const {categories} = this.props
 
     return (
@@ -61,13 +60,12 @@ class App extends Component {
             <FaPencil size={30}/>
           </Link>
           <div className="category-changer">
-            <p>Filter Post by Category</p>
-            <select onChange={this.handleChange}>
-                <option key="none" value="none">none</option>
-              {categories && categories.map((category) => (
-                <option key={category.name} value={category.name}>{category.name}</option>
-                ))}
-            </select>
+            <p>See the post in certain category</p>
+            {categories && categories.map(category => (
+              <Link key={category.name} to={`/${category.path}`}>
+                <button>{category.name}</button>
+              </Link>
+              ))}
           </div>
         </div>
 
@@ -89,7 +87,6 @@ class App extends Component {
 
 // map Redux state to this.props
 function mapStateToProps({categories}) {
-  console.log("categories from App", categories)
   return {
     // posts: postsReducer.posts,
     categories: categories
@@ -103,3 +100,10 @@ export default withRouter(connect(mapStateToProps, {
                 fetchAllcategories,
                 fetchPostsByCategory})(App))
 
+            // <p>Filter Post by Category</p>
+            // <select onChange={this.handleChange}>
+            //     <option key="none" value="none">none</option>
+            //   {categories && categories.map((category) => (
+            //     <option key={category.name} value={category.name}>{category.name}</option>
+            //     ))}
+            // </select>

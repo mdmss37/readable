@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { connect }  from 'react-redux'
-import { Link, Route, withRouter } from 'react-router-dom'
-import { fetchAllPosts, createPost} from '../actions/postActions'
 import { createComment } from '../actions/commentActions'
-import { formatTimestamp, guid }  from '../utils/helpers'
+import { guid }  from '../utils/helpers'
 
 // TODO: http://redux-form.com/6.7.0/docs/faq/HowToConnect.md/
 class CommentSubmitForm extends Component {
