@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link, Route, withRouter, Switch } from 'react-router-dom'
 import '../App.css';
 import { connect }  from 'react-redux'
-import { fetchAllPosts, fetchPostsByCategory } from '../actions/postActions'
+import { fetchAllPosts, fetchPostsByCategory, sortPost } from '../actions/postActions'
 import { fetchAllcategories } from '../actions/categoryActions'
 import FaPencil from 'react-icons/lib/fa/pencil'
 import FaHome from 'react-icons/lib/fa/home'
@@ -36,6 +36,13 @@ class App extends Component {
           <Link className="create-new-post" to="/new">
             <FaPencil size={30}/>
           </Link>
+
+          <div className="sort-changer">
+            <p>Sort Posts By:</p>
+            <button onClick={() => this.props.sortPost("timestamp")}>Time</button>
+            <button onClick={() => this.props.sortPost("voteScore")}>Vote Score</button>
+          </div>
+
           <div className="category-changer">
             <p>See posts in certain category</p>
             {categories && categories.map(category => (
@@ -75,4 +82,5 @@ function mapStateToProps({categories}) {
 export default withRouter(connect(mapStateToProps, {
                 fetchAllPosts,
                 fetchAllcategories,
-                fetchPostsByCategory})(App))
+                fetchPostsByCategory,
+                sortPost})(App))

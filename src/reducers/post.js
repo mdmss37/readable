@@ -3,6 +3,7 @@
 // Return one and the same result if the same arguments are passed in
 // Depend solely on the arguments passed into them
 // Do not produce side effects
+import sortBy from 'sort-by'
 
 import {
   GET_POSTS,
@@ -10,11 +11,12 @@ import {
   CREATE_POST,
   UPDATE_POST,
   DELETE_POST,
-  VOTE_POST
+  VOTE_POST,
+  SORT_POST
 } from '../actions/postActions'
 
 function posts(state=[], action) {
-  const { posts, post, postId, updatedPost } = action
+  const { posts, post, postId, updatedPost, sortKey } = action
   switch(action.type) {
     case GET_POSTS:
       return posts.filter(post => !(post.deleted))
@@ -43,6 +45,8 @@ function posts(state=[], action) {
         }
         return post
       })
+    case SORT_POST:
+      return [].concat(state.sort(sortBy("-"+sortKey)))
     default:
       return state
   }

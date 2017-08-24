@@ -7,6 +7,7 @@ export const CREATE_POST = 'CREATE_POST'
 export const UPDATE_POST = 'UPDATE_POST'
 export const DELETE_POST = 'DELETE_POST'
 export const VOTE_POST = 'VOTE_POST'
+export const SORT_POST = 'SORT_POST'
 
 let token = localStorage.token
 
@@ -97,6 +98,11 @@ export const votePost = (postId, option) => {
   }
 }
 
+export const sortPost = (sortKey) => {
+  return dispatch => {
+    dispatch({type: SORT_POST, sortKey})
+  }
+}
 // export function downvotePost(post) {
 //   console.log("From downvotePost, post:", post)
 //   ReadableAPI.downvotePost(post.id)
