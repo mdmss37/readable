@@ -1,17 +1,10 @@
 import React, { Component } from 'react';
-// import logo from '../logo.svg';
 import PropTypes from 'prop-types';
 import { Link, Route, withRouter, Switch } from 'react-router-dom'
 import '../App.css';
 import { connect }  from 'react-redux'
 import { fetchAllPosts, fetchPostsByCategory } from '../actions/postActions'
 import { fetchAllcategories } from '../actions/categoryActions'
-// import { fetchCommentsById } from '../actions/commentActions'
-// import { formatTimestamp, guid }  from '../utils/helpers'
-// import serializeForm from "form-serialize"
-// https://gorangajic.github.io/react-icons/index.html
-// import FaCaretUp from 'react-icons/lib/fa/caret-up'
-// import FaCaretDown from 'react-icons/lib/fa/caret-down'
 import FaPencil from 'react-icons/lib/fa/pencil'
 import FaHome from 'react-icons/lib/fa/home'
 import PostSubmitForm from './post_form_submit'
@@ -28,25 +21,8 @@ class App extends Component {
   }
 
   componentDidMount() {
-    // this.props.dispatch(fetchAllPosts())
-    // fetchAllPosts()(this.props.dispatch)
-    // console.log("componentDidMount")
     this.props.fetchAllcategories()
-    // this.props.posts
-    // fetchCommentsById({id: "8xf0y6ziyjabvozdd253nd" })(this.props.dispatch)
   }
-
-  // handleChange = (e) => {
-  //   const selectedCategory = e.target.value
-  //   if (selectedCategory === "none") {
-  //     this.props.history.push("/")
-  //     this.props.fetchAllPosts()
-  //   } else {
-  //     console.log(selectedCategory)
-  //     this.props.history.push(`/${selectedCategory}`)
-  //     this.props.fetchPostsByCategory(selectedCategory)
-  //   }
-  // }
 
   render() {
     const {categories} = this.props
@@ -61,7 +37,7 @@ class App extends Component {
             <FaPencil size={30}/>
           </Link>
           <div className="category-changer">
-            <p>See the post in certain category</p>
+            <p>See posts in certain category</p>
             {categories && categories.map(category => (
               <Link key={category.name} to={`/${category.path}`}>
                 <button>{category.name}</button>
@@ -90,7 +66,6 @@ class App extends Component {
 // map Redux state to this.props
 function mapStateToProps({categories}) {
   return {
-    // posts: postsReducer.posts,
     categories: categories
   }
 }
@@ -101,11 +76,3 @@ export default withRouter(connect(mapStateToProps, {
                 fetchAllPosts,
                 fetchAllcategories,
                 fetchPostsByCategory})(App))
-
-            // <p>Filter Post by Category</p>
-            // <select onChange={this.handleChange}>
-            //     <option key="none" value="none">none</option>
-            //   {categories && categories.map((category) => (
-            //     <option key={category.name} value={category.name}>{category.name}</option>
-            //     ))}
-            // </select>
