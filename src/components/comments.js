@@ -45,8 +45,12 @@ class Comments extends Component {
             <div className="post-detail">
               <div className="post-author"><p>{comment.author} at {formatTimestamp(comment.timestamp)}</p></div>
             </div>
+
             <div className="button-action">
-              <button>Edit Comment</button>
+              <Link to={`/post/${comment.parentId}/${comment.id}/edit`}>
+                <button>Edit Comment</button>
+              </Link>
+
               <button onClick={() => this.onDeleteClick(comment)}>Delete Comment</button>
             </div>
           </div>

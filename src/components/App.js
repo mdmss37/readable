@@ -16,6 +16,7 @@ import FaPencil from 'react-icons/lib/fa/pencil'
 import FaHome from 'react-icons/lib/fa/home'
 import PostSubmitForm from './post_form_submit'
 import CommentSubmitForm from './comment_form_submit'
+import CommentEditForm from './comment_form_edit'
 import PostEditForm from './post_form_edit'
 import PostList from './post_list'
 import PostDetail from './post_detail'
@@ -78,6 +79,7 @@ class App extends Component {
             exact path="/:category/:postId" component={PostDetail}/>
           <Route path="/post/:postId/edit" component={PostEditForm}/>
           <Route path="/post/:postId/comment" component={CommentSubmitForm}/>
+          <Route path="/post/:postId/:commentId/edit" component={CommentEditForm}/>
         </Switch>
 
       </div>

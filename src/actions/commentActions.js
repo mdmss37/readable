@@ -63,3 +63,19 @@ export const voteComment = (commentId, parentId, voteScore, option) => {
     })
   }
 }
+
+export const updateComment = (commentId, postId ,timestamp, body, callback) => {
+  return (dispatch) => {
+    fetch(`${apiUrl}/comments/${commentId}`, {
+      method: 'PUT',
+      headers: headers,
+      body: JSON.stringify({timestamp: timestamp, body: body})
+    })
+    .then(res => res.json())
+    .then(updatedComment => {
+      dispatch({type: UPDATE_COMMENT, updatedComment, commentId, postId})
+    })
+    .then(() => callback())
+  }
+}
+

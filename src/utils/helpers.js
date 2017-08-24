@@ -14,11 +14,13 @@
 // }
 
 export function formatTimestamp(timestamp) {
-  const date = new Date(timestamp*1000)
-  const hours = date.getHours()
-  const minutes = "0" + date.getMinutes()
-  const seconds = "0" + date.getSeconds()
-  return hours + ":" + minutes.substr(-2) + ":" + seconds.substr(-2)
+  const d = new Date(timestamp)
+  return d.toLocaleString()
+  // const date = new Date(timestamp*1000)
+  // const hours = date.getHours()
+  // const minutes = "0" + date.getMinutes()
+  // const seconds = "0" + date.getSeconds()
+  // return hours + ":" + minutes.substr(-2) + ":" + seconds.substr(-2)
 }
 // https://stackoverflow.com/questions/105034/create-guid-uuid-in-javascript
 export function guid() {
