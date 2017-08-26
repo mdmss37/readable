@@ -25,7 +25,7 @@ class CommentEditForm extends Component {
     const {comment} = this.props
 
     if(!comment) {
-      return <div>No comment there</div>
+      return <div><h1>No comment to edit</h1></div>
     }
 
     return (

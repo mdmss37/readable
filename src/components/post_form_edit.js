@@ -2,13 +2,15 @@ import _ from 'lodash'
 import React, { Component } from 'react';
 import { connect }  from 'react-redux'
 import { Link } from 'react-router-dom'
-import * as postActions from '../actions/post_actions'
+import { fetchAllPosts, updatePost } from '../actions/post_actions'
+import { fetchCommentsById } from '../actions/comment_actions'
 
 // TODO: http://redux-form.com/6.7.0/docs/faq/HowToConnect.md/
 class PostEditForm extends Component {
-  // componentDidMount() {
-  //   this.props.fetchAllPosts()
-  // }
+  componentDidMount() {
+    this.props.fetchAllPosts()
+    this.props.fetchCommentsById(this.props.match.params.postId)
+  }
 
   handleSubmit = (e) => {
     e.preventDefault()
@@ -21,9 +23,13 @@ class PostEditForm extends Component {
   }
 
   render() {
-    const {post} = this.props
+    const { post, comments } = this.props
+
+    if(!post && !comments) {
+      return <div><h1>Loading..</h1></div>
+    }
     if(!post) {
-      return <div>No post to Edit</div>
+      return <div><h1>Post not found</h1></div>
     }
     return (
       <div>
@@ -50,13 +56,15 @@ class PostEditForm extends Component {
   }
 }
 
-function mapStateToProps({ posts }, {match}) {
+function mapStateToProps({ posts, comments }, {match}) {
   console.log("state", this.state)
   return {
-    post: _.find(posts, {id: match.params.postId })
+    post: _.find(posts, {id: match.params.postId }),
+    comments: comments[match.params.postId]
   }
 }
 
 // https://stackoverflow.com/questions/42123261/programmatically-navigate-using-react-router-v4
-export default connect(mapStateToProps, { postActions })(PostEditForm)
+export default connect(mapStateToProps, {
+                fetchAllPosts, updatePost, fetchCommentsById })(PostEditForm)
 

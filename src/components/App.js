@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link, Route, withRouter, Switch } from 'react-router-dom'
 import '../App.css';
 import { connect }  from 'react-redux'
-import * as postActions from '../actions/post_actions'
+import { sortPost } from '../actions/post_actions'
 import { fetchAllcategories } from '../actions/category_actions'
 import FaPencil from 'react-icons/lib/fa/pencil'
 import FaHome from 'react-icons/lib/fa/home'
@@ -25,7 +25,7 @@ class App extends Component {
   }
 
   render() {
-    const {categories} = this.props
+    const { categories, sortPost } = this.props
 
     return (
       <div className="App">
@@ -39,8 +39,8 @@ class App extends Component {
 
           <div className="sort-changer">
             <p>Sort Posts By:</p>
-            <button onClick={() => this.props.sortPost("timestamp")}>Time</button>
-            <button onClick={() => this.props.sortPost("voteScore")}>Vote Score</button>
+            <button onClick={() => sortPost("timestamp")}>Time</button>
+            <button onClick={() => sortPost("voteScore")}>Vote Score</button>
           </div>
 
           <div className="category-changer">
@@ -60,9 +60,9 @@ class App extends Component {
 
           <Route
             exact path="/:category/:postId" component={PostDetail}/>
-          <Route path="/post/:postId/edit" component={PostEditForm}/>
-          <Route path="/post/:postId/comment" component={CommentSubmitForm}/>
-          <Route path="/post/:postId/:commentId/edit" component={CommentEditForm}/>
+          <Route path="/:category/:postId/edit" component={PostEditForm}/>
+          <Route path="/:category/:postId/comment" component={CommentSubmitForm}/>
+          <Route path="/:category/:postId/:commentId/edit" component={CommentEditForm}/>
         </Switch>
 
       </div>
@@ -80,5 +80,5 @@ function mapStateToProps({categories}) {
 // https://stackoverflow.com/questions/45056150/react-router-v4-not-working-with-redux
 // https://reacttraining.com/react-router/web/guides/redux-integration
 export default withRouter(connect(mapStateToProps, {
-                postActions,
+                sortPost,
                 fetchAllcategories})(App))

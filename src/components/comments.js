@@ -17,7 +17,7 @@ class Comments extends Component {
   }
 
   render() {
-    const { comments } = this.props
+    const { comments, category } = this.props
     if(!comments) {
       return <div>No Comments</div>
     }
@@ -26,9 +26,9 @@ class Comments extends Component {
       <div>
       <h2>Comments</h2>
       {comments.map(comment => (
-        <div key={comment.id }>
+        <div key={comment.id}>
           {comment && (
-          <div className="post" key={ comment.id }>
+          <div className="post" key={comment.id}>
             <div className="post-votes">
               <FaCaretUp size={30} className="caret-up" onClick={() => {
                 this.props.voteComment(comment.id, comment.parentId, "upVote")
@@ -39,14 +39,14 @@ class Comments extends Component {
               }}/>
             </div>
             <div className="post-description">
-              <div className="post-body"><p>{ comment.body }</p></div>
+              <div className="post-body"><p>{comment.body}</p></div>
             </div>
             <div className="post-detail">
-              <div className="post-author"><p>{ comment.author } at {formatTimestamp(comment.timestamp)}</p></div>
+              <div className="post-author"><p>{comment.author} at {formatTimestamp(comment.timestamp)}</p></div>
             </div>
 
             <div className="button-action">
-              <Link to={`/post/${ comment.parentId }/${ comment.id }/edit`}>
+              <Link to={`/${category}/${comment.parentId}/${comment.id}/edit`}>
                 <button>Edit Comment</button>
               </Link>
 

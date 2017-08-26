@@ -25,7 +25,14 @@ class PostDetail extends Component {
   }
 
   render() {
-    const {post, comments, votePost, fetchAllPosts} = this.props
+    const {post, comments, votePost, fetchAllPosts, match} = this.props
+    console.log("PostDetail", post)
+    if(!post && !comments) {
+      return <div><h1>Loading..</h1></div>
+    }
+    if(!post) {
+      return <div><h1>Post not found</h1></div>
+    }
 
     return(
       <div>
@@ -53,10 +60,10 @@ class PostDetail extends Component {
           </div>
           <div className="button-action">
 
-            <Link to={`/post/${post.id}/edit`}>
+            <Link to={`/${post.category}/${post.id}/edit`}>
               <button>Edit Post</button>
             </Link>
-            <Link to={`/post/${post.id}/comment`}>
+            <Link to={`/${post.category}/${post.id}/comment`}>
               <button>Create Comment</button>
             </Link>
 
@@ -64,15 +71,16 @@ class PostDetail extends Component {
           </div>
         </div>
       )}
-      {comments && <Comments comments={comments}/>}
+      {post && comments && <Comments category={post.category} comments={comments}/>}
       </div>
     )
   }
 }
 
-function mapStateToProps({ posts, comments }, {match}) {
+function mapStateToProps({ posts, comments }, { match }) {
+  const post = _.find(posts, {id: match.params.postId })
   return {
-    post: _.find(posts, {id: match.params.postId }),
+    post: post,
     comments: comments[match.params.postId]
   }
 }
