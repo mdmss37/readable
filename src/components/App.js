@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { Link, Route, withRouter, Switch } from 'react-router-dom'
 import '../App.css';
 import { connect }  from 'react-redux'
-import { fetchAllPosts, fetchPostsByCategory, sortPost } from '../actions/postActions'
-import { fetchAllcategories } from '../actions/categoryActions'
+import * as postActions from '../actions/post_actions'
+import { fetchAllcategories } from '../actions/category_actions'
 import FaPencil from 'react-icons/lib/fa/pencil'
 import FaHome from 'react-icons/lib/fa/home'
 import PostSubmitForm from './post_form_submit'
@@ -80,7 +80,5 @@ function mapStateToProps({categories}) {
 // https://stackoverflow.com/questions/45056150/react-router-v4-not-working-with-redux
 // https://reacttraining.com/react-router/web/guides/redux-integration
 export default withRouter(connect(mapStateToProps, {
-                fetchAllPosts,
-                fetchAllcategories,
-                fetchPostsByCategory,
-                sortPost})(App))
+                postActions,
+                fetchAllcategories})(App))

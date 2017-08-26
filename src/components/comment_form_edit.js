@@ -2,7 +2,7 @@ import _ from 'lodash'
 import React, { Component } from 'react';
 import { connect }  from 'react-redux'
 import { Link } from 'react-router-dom'
-import { updateComment, fetchCommentsById } from '../actions/commentActions'
+import * as commentActions from '../actions/comment_actions'
 
 // TODO: http://redux-form.com/6.7.0/docs/faq/HowToConnect.md/
 class CommentEditForm extends Component {
@@ -56,5 +56,4 @@ function mapStateToProps({ posts, comments }, {match}) {
 }
 
 // https://stackoverflow.com/questions/42123261/programmatically-navigate-using-react-router-v4
-export default connect(mapStateToProps, {
-                updateComment, fetchCommentsById})(CommentEditForm)
+export default connect(mapStateToProps, commentActions)(CommentEditForm)

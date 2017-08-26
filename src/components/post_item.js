@@ -1,13 +1,11 @@
-import _ from 'lodash'
 import React, { Component } from 'react';
 import { connect }  from 'react-redux'
 import FaCaretUp from 'react-icons/lib/fa/caret-up'
 import FaCaretDown from 'react-icons/lib/fa/caret-down'
-import { formatTimestamp, guid }  from '../utils/helpers'
-import { Link, Route, withRouter } from 'react-router-dom'
-import { fetchCommentsById } from '../actions/commentActions'
-import { fetchAllPosts, votePost, deletePost } from '../actions/postActions'
-import Comments from './comments'
+import { formatTimestamp }  from '../utils/helpers'
+import { Link } from 'react-router-dom'
+import { fetchCommentsById } from '../actions/comment_actions'
+import { fetchAllPosts, votePost } from '../actions/post_actions'
 
 class PostItem extends Component {
   componentDidMount() {
@@ -16,7 +14,7 @@ class PostItem extends Component {
   }
 
   render() {
-    const {post, comments, votePost, deletePost, fetchAllPosts} = this.props
+    const {post, comments, votePost, fetchAllPosts} = this.props
 
     return(
       <div>
@@ -51,8 +49,7 @@ class PostItem extends Component {
   }
 }
 
-function mapStateToProps({ comments }, {post}) {
-  // console.log("ownProps", ownProps)
+function mapStateToProps({ comments }, { post }) {
   return {
     comments: comments[post.id]
   }
@@ -60,11 +57,6 @@ function mapStateToProps({ comments }, {post}) {
 
 export default connect(mapStateToProps, {
                 fetchAllPosts,
-                fetchCommentsById,
                 votePost,
-                deletePost
+                fetchCommentsById
                 })(PostItem)
-
-
-
-

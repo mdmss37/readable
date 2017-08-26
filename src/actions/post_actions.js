@@ -20,13 +20,6 @@ const headers = {
   'Content-Type': 'application/json'
 }
 
-// export function receiveAllPosts(posts) {
-//   return {
-//     type: RECEIVE_POSTS,
-//     posts: posts
-//   }
-// }
-
 export const fetchAllPosts = () => {
   return (dispatch) => {
     fetch(`${apiUrl}/posts`, {headers})
@@ -103,11 +96,3 @@ export const sortPost = (sortKey) => {
     dispatch({type: SORT_POST, sortKey})
   }
 }
-// export function downvotePost(post) {
-//   console.log("From downvotePost, post:", post)
-//   ReadableAPI.downvotePost(post.id)
-//   return {
-//     type: DOWNVOTE_POST,
-//     post,
-//   }
-// }

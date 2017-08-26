@@ -2,7 +2,7 @@ import _ from 'lodash'
 import React, { Component } from 'react';
 import { connect }  from 'react-redux'
 import { Link } from 'react-router-dom'
-import { fetchAllPosts, updatePost } from '../actions/postActions'
+import * as postActions from '../actions/post_actions'
 
 // TODO: http://redux-form.com/6.7.0/docs/faq/HowToConnect.md/
 class PostEditForm extends Component {
@@ -58,7 +58,5 @@ function mapStateToProps({ posts }, {match}) {
 }
 
 // https://stackoverflow.com/questions/42123261/programmatically-navigate-using-react-router-v4
-export default connect(mapStateToProps, {
-                fetchAllPosts,
-                updatePost})(PostEditForm)
+export default connect(mapStateToProps, { postActions })(PostEditForm)
 

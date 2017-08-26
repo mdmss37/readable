@@ -17,17 +17,17 @@ const headers = {
   'Content-Type': 'application/json'
 }
 
-export const fetchCommentsById = (postId) => {
+export const fetchCommentsById = (parentId) => {
   return (dispatch) => {
-    fetch(`${apiUrl}/posts/${postId}/comments`, { headers })
+    fetch(`${apiUrl}/posts/${parentId}/comments`, { headers })
       .then(res => res.json())
       .then(comments => {
-        dispatch({type: GET_COMMENTS, postId, comments })
+        dispatch({type: GET_COMMENTS, parentId, comments })
       })
   }
 }
 
-export const createComment = (comment, postId, callback) => {
+export const createComment = (comment, parentId, callback) => {
   return (dispatch) => {
     fetch(`${apiUrl}/comments`, {
       method: 'POST',
@@ -35,7 +35,7 @@ export const createComment = (comment, postId, callback) => {
       body: JSON.stringify(comment)})
     .then(res => res.json())
     .then(comment => {
-      dispatch({type: CREATE_COMMENT, postId, comment})
+      dispatch({type: CREATE_COMMENT, parentId, comment})
     })
     .then(() => callback())
   }
@@ -51,20 +51,20 @@ export const deleteComment = (commentId) => {
   }
 }
 
-export const voteComment = (commentId, parentId, voteScore, option) => {
+export const voteComment = (commentId, parentId, option) => {
   return (dispatch) => {
     fetch(`${apiUrl}/comments/${commentId}`, {
       method: 'POST',
       headers: headers,
       body: JSON.stringify({option})})
     .then(res => res.json())
-    .then(comment => {
-      dispatch({type: VOTE_COMMENT, commentId, parentId, voteScore, option})
+    .then(updatedComment => {
+      dispatch({type: VOTE_COMMENT, updatedComment, commentId, parentId})
     })
   }
 }
 
-export const updateComment = (commentId, postId ,timestamp, body, callback) => {
+export const updateComment = (commentId, parentId ,timestamp, body, callback) => {
   return (dispatch) => {
     fetch(`${apiUrl}/comments/${commentId}`, {
       method: 'PUT',
@@ -73,7 +73,7 @@ export const updateComment = (commentId, postId ,timestamp, body, callback) => {
     })
     .then(res => res.json())
     .then(updatedComment => {
-      dispatch({type: UPDATE_COMMENT, updatedComment, commentId, postId})
+      dispatch({type: UPDATE_COMMENT, updatedComment, commentId, parentId})
     })
     .then(() => callback())
   }

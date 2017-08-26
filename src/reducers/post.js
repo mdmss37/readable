@@ -13,7 +13,7 @@ import {
   DELETE_POST,
   VOTE_POST,
   SORT_POST
-} from '../actions/postActions'
+} from '../actions/post_actions'
 
 function posts(state=[], action) {
   const { posts, post, postId, updatedPost, sortKey } = action

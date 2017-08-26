@@ -1,6 +1,6 @@
 import {
   GET_CATEGORIES,
-} from '../actions/categoryActions'
+} from '../actions/category_actions'
 
 function categories(state=[], action) {
   const { defaultData } = action

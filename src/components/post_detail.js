@@ -5,11 +5,12 @@ import FaCaretUp from 'react-icons/lib/fa/caret-up'
 import FaCaretDown from 'react-icons/lib/fa/caret-down'
 import { formatTimestamp }  from '../utils/helpers'
 import { Link } from 'react-router-dom'
-import { fetchCommentsById } from '../actions/commentActions'
-import { fetchAllPosts, votePost, deletePost } from '../actions/postActions'
+import { fetchCommentsById } from '../actions/comment_actions'
+import { fetchAllPosts, votePost, deletePost } from '../actions/post_actions'
 import Comments from './comments'
 
 class PostDetail extends Component {
+
   componentDidMount() {
     const { match, fetchAllPosts, fetchCommentsById } = this.props
     fetchAllPosts()
@@ -24,7 +25,7 @@ class PostDetail extends Component {
   }
 
   render() {
-    const {post, comments, votePost, deletePost, fetchAllPosts} = this.props
+    const {post, comments, votePost, fetchAllPosts} = this.props
 
     return(
       <div>
@@ -70,7 +71,6 @@ class PostDetail extends Component {
 }
 
 function mapStateToProps({ posts, comments }, {match}) {
-  // console.log("ownProps", ownProps)
   return {
     post: _.find(posts, {id: match.params.postId }),
     comments: comments[match.params.postId]
@@ -79,11 +79,7 @@ function mapStateToProps({ posts, comments }, {match}) {
 
 export default connect(mapStateToProps, {
                 fetchAllPosts,
-                fetchCommentsById,
                 votePost,
-                deletePost
+                deletePost,
+                fetchCommentsById
                 })(PostDetail)
-
-
-
-

@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import PostItem from '../components/post_item'
 import { connect }  from 'react-redux'
-import { fetchAllPosts, fetchPostsByCategory, votePost} from '../actions/postActions'
-import { fetchCommentsById } from '../actions/commentActions'
+import { fetchAllPosts } from '../actions/post_actions'
 
 class PostList extends Component {
   static propTypes = {
@@ -11,6 +10,7 @@ class PostList extends Component {
   }
 
   componentDidMount() {
+    console.log(this.props)
     this.props.fetchAllPosts()
   }
 
@@ -36,8 +36,4 @@ function mapStateToProps({ posts }, {match}) {
   }
 }
 
-export default connect(mapStateToProps, {
-                fetchAllPosts,
-                fetchPostsByCategory,
-                fetchCommentsById,
-                votePost})(PostList)
+export default connect(mapStateToProps, { fetchAllPosts })(PostList)
