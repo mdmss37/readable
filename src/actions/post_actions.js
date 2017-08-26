@@ -1,4 +1,4 @@
-import {apiUrl} from '../utils/ReadableAPI'
+import {apiUrl, headers} from '../utils/ReadableAPI'
 
 // export const RECEIVE_POSTS = 'RECEIVE_POSTS'
 export const GET_POSTS = 'GET_POSTS'
@@ -8,17 +8,6 @@ export const UPDATE_POST = 'UPDATE_POST'
 export const DELETE_POST = 'DELETE_POST'
 export const VOTE_POST = 'VOTE_POST'
 export const SORT_POST = 'SORT_POST'
-
-let token = localStorage.token
-
-if (!token)
-  token = localStorage.token = Math.random().toString(36).substr(-8)
-
-const headers = {
-  'Accept': 'application/json',
-  'Authorization': 'whatever',
-  'Content-Type': 'application/json'
-}
 
 export const fetchAllPosts = () => {
   return (dispatch) => {

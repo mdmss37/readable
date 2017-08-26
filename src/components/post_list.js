@@ -16,10 +16,10 @@ class PostList extends Component {
 
   render() {
     const {posts} = this.props
-    if(!posts) {
-      return <div>Loading...</div>
-    }
-    return (
+    //[Review] use conditional statement
+    return (!posts)
+    ? <div>Loading...</div>
+    : (
       <div>
         {posts.map(post => (
           <PostItem key={post.id} post={post}/>

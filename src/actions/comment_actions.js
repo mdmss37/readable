@@ -1,21 +1,10 @@
-import {apiUrl} from '../utils/ReadableAPI'
+import {apiUrl, headers} from '../utils/ReadableAPI'
 
 export const GET_COMMENTS = 'GET_COMMENTS'
 export const CREATE_COMMENT = 'CREATE_COMMENT'
 export const UPDATE_COMMENT = 'UPDATE_COMMENT'
 export const DELETE_COMMENT = 'DELETE_COMMENT'
 export const VOTE_COMMENT = 'VOTE_COMMENT'
-
-let token = localStorage.token
-
-if (!token)
-  token = localStorage.token = Math.random().toString(36).substr(-8)
-
-const headers = {
-  'Accept': 'application/json',
-  'Authorization': 'whatever',
-  'Content-Type': 'application/json'
-}
 
 export const fetchCommentsById = (parentId) => {
   return (dispatch) => {
